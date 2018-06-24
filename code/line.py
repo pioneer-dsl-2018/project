@@ -8,11 +8,11 @@ class line:
         self.element = []
 
     #mutators
+    # this function adds an element to the end of a line
     def addElement(self, element):
         e = element()
-        element.append(e)
+        self.elements.append(e)
 
-    def
 
 
 

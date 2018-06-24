@@ -1,6 +1,7 @@
 # The element class
 # There should be private variables such as label and names
 
+
 class element:
 
     label = "" #label is what the user want to be appear on the circuit, it may contains values e.g. 13nC

@@ -8,7 +8,15 @@ class circuit:
         self.connection = []
 
     #
-    def connect(*lines):
+    def connectInParallel(self, *lines):
+        for l in lines:
+            self.connection.append(l)
+
+
+    def connectInSeries(self, *lines):
+        for l in lines:
+            self.connection.extend(l.elements)
+
 
 
 
