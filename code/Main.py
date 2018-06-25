@@ -14,6 +14,8 @@ l1 = line()
 cap = element('Capacitor',"13nC")
 l1.addElement(cap)
 
-c.writeDocument('/Users/teo/Documents/PycharmProjects/Pioneer DSL/Run.txt') # replace the argument as the address of the Run.txt file
+# replace the argument as the address of the Run.txt file
+# After executing Main.py, just use python to run 'Run.txt'
+c.writeDocument('/Users/teo/Documents/PycharmProjects/Pioneer DSL/Run.txt','output.png')
 
 
