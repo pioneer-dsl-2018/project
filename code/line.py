@@ -1,17 +1,16 @@
 # everything connects in series in A LINE
-class line:
+# import packages
 
-    elements = []
+class line:
 
     #Constructors
     def __init__(self):
-        self.element = []
+        self.elements = []# a list of elements
 
     #mutators
     # this function adds an element to the end of a line
     def addElement(self, element):
-        e = element()
-        self.elements.append(e)
+        self.elements.append(element)
 
 
 
