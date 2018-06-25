@@ -1,5 +1,4 @@
 # everything connects in series in A LINE
-# import packages
 
 class line:
 
@@ -12,6 +11,7 @@ class line:
     def addElement(self, element):
         self.elements.append(element)
 
-
-
-
+    # insert an element given an index
+    # if the index is not given, it will insert the element at the beginning of the line
+    def insertElement(self,element, index = 0):
+        self.elements.insert(index, element)

@@ -1,4 +1,6 @@
 # This file should act as the "back"
+
+#import packages
 from line import *
 from circuit import *
 from element import *
@@ -9,12 +11,11 @@ library = {'Capacitor':'e.CAP','Resistor':'e.RES', 'Cell': 'e.BAT_CELL','Battery
 
 # Main
 # In this demo, there is a circuit with one line. And on this line there is an element "capacitor"
-c = circuit()
-l1 = line()
-cap = element(library['Capacitor'],"13nC")
-l1.addElement(cap)
+c = circuit()                              # instantiate a new circuit
+l1 = line()                                # instantiate a new line
+cap = element(library['Capacitor'],"13nC") # instantiate a new element and convert the name to a SchemDraw Library name
+l1.addElement(cap)                         # add the capacitor element to l1
 c.connectInSeries(l1)
-
 
 # replace the argument as the address of the Run.txt file
 # After executing Main.py, just use python to run 'Run.txt'

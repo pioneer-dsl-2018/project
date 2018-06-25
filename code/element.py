@@ -1,5 +1,5 @@
 # The element class
-# There should be private variables such as label and names
+# There are fields such as label and names
 
 class element:
 
@@ -12,11 +12,13 @@ class element:
     # e.g.
     '''
     >>>print (capacitor)
-       (e.CAP, d = 'right', label = '12nC')
+       d.add(e.CAP, d = 'right', label = '12nC')
     '''
-
     def __str__(self):
         str = 'd.add(' + self.name + ',' + 'd = \'right\',' + 'label = ' + '\'' +self.label + '\'' + ')'
         return str
-    #change the name of the element
+
+    #change the label of the element
+    def changeLabel(self, newLabel):
+        self.label = newLabel
 
