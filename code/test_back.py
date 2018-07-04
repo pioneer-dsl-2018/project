@@ -17,7 +17,7 @@ l1 = line()                                  # instantiate a new line
 cap = element(library['Capacitor'],"13nC")   # instantiate a new element and convert the name to a SchemDraw Library name
 l1.addElement(cap)                           # add the capacitor element to l1
 c.connectInSeries(l1)
-c.evaluate("output.pdf")
+c.evaluate("output.png")
 '''
 
 

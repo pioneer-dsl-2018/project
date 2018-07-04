@@ -1,0 +1,19 @@
+    sentence: verb noun conj noun prep connection   -> standard
+            | verb noun                             -> simple
+            | verb noun prep noun                   -> modify
+
+    noun: NOUN
+    verb: VERB
+    connection: CONNECTION
+    conj: CONJUNCTION
+    prep: PREP
+
+    NOUN: "capacitor" | "resistor" | "battery"
+    VERB: "connect" | "add" | "remove" | "save"
+    CONNECTION: "parallel" | "series"
+    PREP: "in" | "with" | "to" | "as"
+    CONJUNCTION: "and"
+
+
+    %import common.WS
+    %ignore WS
