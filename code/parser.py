@@ -11,7 +11,7 @@ file = open('input.txt','r')
 program = file.read()
 
 
-#print(parser.parse(program).pretty())
+print(parser.parse(program).pretty())
 
 def run_circuit(program):
     parse_tree = parser.parse(program)
@@ -21,17 +21,18 @@ def run_circuit(program):
 def run_sentence(p):
     if p.data == 'verb':
         if p.children[0] == 'connect':
+            global l1
             l1 = line()
-    if p.data == 'connection':
+    elif p.data == 'connection':
         if p.children[0] == 'series':
             print('series')
             c.connectInSeries(l1)
-    if p.data == "conj":
+    elif p.data == "conj":
         if p.children[0] == 'and':
             print('and')
-    if p.data == 'prep':
+    elif p.data == 'prep':
         print('prep')
-    if p.data == 'noun':
+    elif p.data == 'noun':
         if p.children[0] == 'capacitor':
             cap = element('e.CAP', "19C")
             l1.addElement(cap)
