@@ -25,25 +25,21 @@ def run_sentence(p):
             l1 = line()
     elif p.data == 'connection':
         if p.children[0] == 'series':
-            print('series')
             c.connectInSeries(l1)
     elif p.data == "conj":
         if p.children[0] == 'and':
-            print('and')
+            pass
     elif p.data == 'prep':
-        print('prep')
+        pass
     elif p.data == 'noun':
         if p.children[0] == 'capacitor':
             cap = element('e.CAP', "19C")
             l1.addElement(cap)
-            print('cap')
         elif p.children[0] == 'resistor':
             res = element('e.RES', "89\Omega")
             l1.addElement(res)
-            print('res')
-    print(l1.elements)
-    c.evaluate("output.png")
 
 #Main
 c = circuit()
 run_circuit(program)
+c.evaluate("output.png")
