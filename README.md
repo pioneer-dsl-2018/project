@@ -14,4 +14,23 @@ After the packages are installed, download these files and put them in a place t
 python3 parser.py
 ```
 
-Within a second, you should see ```output.png``` generated in the same directory! Open ```input.txt``` and try your own inputs!
+You should see a file called "output.png generated in the dirctory and something like this printed out
+```
+sentence
+  verb	connect
+  noun	capacitor
+  conj	and
+  noun	resistor
+  prep	in
+  connection	series
+  verb	connect
+  noun	resistor
+  prep	in
+  connection	series
+
+[<element.element object at 0x117307b00>, <element.element object at 0x117307b38>, <element.element object at 0x117307828>]
+
+Process finished with exit code 0
+
+```
+The program is successfully ran on your computer

@@ -23,8 +23,8 @@ class circuit:
     def evaluate(self, ImageName):
         d = SchemDraw.Drawing()
         d.add(e.LINE, d = 'right')
-        exec(str(self.connection[0]))
-        exec(str(self.connection[1]))
+        for i in range(0, len(self.connection)):
+            exec(str(self.connection[i]))
         print(self.connection)
         d.draw()
         d.save(ImageName)

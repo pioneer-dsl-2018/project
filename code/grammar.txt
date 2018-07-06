@@ -1,12 +1,13 @@
-    sentence: verb noun conj noun prep connection   -> standard
-            | verb noun                             -> simple
-            | verb noun prep noun                   -> modify
+
+    sentence: (verb noun conj noun prep connection | verb noun prep connection| verb noun prep noun )+
+
 
     noun: NOUN
     verb: VERB
     connection: CONNECTION
     conj: CONJUNCTION
     prep: PREP
+
 
     NOUN: "capacitor" | "resistor" | "battery"
     VERB: "connect" | "add" | "remove" | "save"

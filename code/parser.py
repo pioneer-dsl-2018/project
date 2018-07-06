@@ -21,11 +21,13 @@ def run_circuit(program):
 def run_sentence(p):
     if p.data == 'verb':
         if p.children[0] == 'connect':
-            global l1
-            l1 = line()
+            global l
+            l = line()
     elif p.data == 'connection':
         if p.children[0] == 'series':
-            c.connectInSeries(l1)
+            c.connectInSeries(l)
+        elif p.children[0] == 'parellel':
+            c.connectInParallel(l)
     elif p.data == "conj":
         if p.children[0] == 'and':
             pass
@@ -34,10 +36,10 @@ def run_sentence(p):
     elif p.data == 'noun':
         if p.children[0] == 'capacitor':
             cap = element('e.CAP', "19C")
-            l1.addElement(cap)
+            l.addElement(cap)
         elif p.children[0] == 'resistor':
             res = element('e.RES', "89\Omega")
-            l1.addElement(res)
+            l.addElement(res)
 
 #Main
 c = circuit()
