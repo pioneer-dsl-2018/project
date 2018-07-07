@@ -6,15 +6,16 @@ To run this program, first install some packages on your computer. Open the term
 
 ```
 $ pip3 install lark-parser
+$ pip3 install SchemDraw
 ```
 
 After the packages are installed, download these files and put them in a place to run. In the ```code``` directory, type this:
 
 ```
-python3 parser.py
+$ python3 parser.py
 ```
 
-You should see a file called "output.png generated in the dirctory and something like this printed out
+You should see a file called "output.png" generated in the dirctory and something like this printed out in the terminal
 ```
 sentence
   verb	connect
@@ -33,4 +34,4 @@ sentence
 Process finished with exit code 0
 
 ```
-The program is successfully ran on your computer
+The program is now successfully ran on your computer
