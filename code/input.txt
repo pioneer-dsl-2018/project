@@ -1,2 +1,1 @@
 connect capacitor and resistor in series
-connect resistor in series

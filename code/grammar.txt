@@ -1,20 +1,13 @@
+    set_label: COMPONENT "is" label //this is not working
+    connection: "connect" components "in" CONNECTION_TYPE
 
-    sentence: (verb noun conj noun prep connection | verb noun prep connection| verb noun prep noun )+
+    components: COMPONENT | components "and" COMPONENT
+    label: NUMBER UNIT | NUMBER
 
-
-    noun: NOUN
-    verb: VERB
-    connection: CONNECTION
-    conj: CONJUNCTION
-    prep: PREP
-
-
-    NOUN: "capacitor" | "resistor" | "battery"
-    VERB: "connect" | "add" | "remove" | "save"
-    CONNECTION: "parallel" | "series"
-    PREP: "in" | "with" | "to" | "as"
-    CONJUNCTION: "and"
-
+    COMPONENT: "capacitor" | "resistor" | "battery"
+    CONNECTION_TYPE: "series" | "parallel"
+    UNIT: /[a-zA-Z_]\w*/
+    NUMBER: /0|[1-9]\d*/
 
     %import common.WS
     %ignore WS
