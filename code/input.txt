@@ -1,1 +1,4 @@
+capacitor is 15 C
+resistor is 15 Om
 connect capacitor and resistor in series
+

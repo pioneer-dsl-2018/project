@@ -15,21 +15,24 @@ After the packages are installed, download these files and put them in a place t
 $ python3 parser.py
 ```
 
-You should see a file called "output.png" generated in the dirctory and something like this printed out in the terminal
+You should see a file called "output.png" generated in the dirctory and the prettified parse tree printed out in the terminal
 ```
-sentence
-  verb	connect
-  noun	capacitor
-  conj	and
-  noun	resistor
-  prep	in
-  connection	series
-  verb	connect
-  noun	resistor
-  prep	in
-  connection	series
-
-[<element.element object at 0x117307b00>, <element.element object at 0x117307b38>, <element.element object at 0x117307828>]
+expression
+  set_label
+    capacitor
+    label
+      15
+      C
+  set_label
+    resistor
+    label
+      15
+      Om
+  connection
+    components
+      components	capacitor
+      resistor
+    series
 
 Process finished with exit code 0
 

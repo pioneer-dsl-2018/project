@@ -1,4 +1,6 @@
-    set_label: COMPONENT "is" label //this is not working
+    expression: (set_label | connection)+
+
+    set_label: COMPONENT "is" label
     connection: "connect" components "in" CONNECTION_TYPE
 
     components: COMPONENT | components "and" COMPONENT

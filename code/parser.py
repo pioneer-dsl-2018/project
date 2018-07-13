@@ -5,7 +5,7 @@ from element import *
 
 grammar = open('grammar.txt','r').read()
 
-parser = Lark(grammar, start='connection')
+parser = Lark(grammar, start = "expression")
 
 file = open('input.txt','r')
 program = file.read()
