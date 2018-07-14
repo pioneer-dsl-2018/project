@@ -1,4 +1,4 @@
-capacitor is 15 C
-resistor is 15 Om
-connect capacitor and resistor in series
+capacitor John is 15 C
+resistor Harry is 15 Om
+connect John and Harry in series
 

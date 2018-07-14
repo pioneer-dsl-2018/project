@@ -6,11 +6,22 @@ class element:
 
     # Constructors
     def __init__(self, name='', label=''):
-        self.name = name #name is the element itself WITH THE SCHEMDRAW REFERENCE. Instead of 'capacitor', it should be 'e.CAP'
+
+        # This 'library' converts names to SchemeDraw library names
+        # There should be more elements this Dictionary
+        library = {'capacitor': 'e.CAP', 'resistor': 'e.RES', 'cell': 'e.BAT_CELL', 'battery': 'e.BATTERY',
+                   'dot': 'e.DOT','switch': 'e.SWITCH_SPST'}
+
+        self.name = name #name is the element itself. Instead of 'capacitor', it should be 'e.CAP'
         self.label = label #label is what the user want to be appear on the circuit, it may contains values e.g. 13nC
+        self.schemName = library[self.name]
 
     def __str__(self):
-        str = 'd.add(' + self.name + ',' + 'd = \'right\',' + 'label = ' + '\'' +self.label + '\'' + ')'
+        str = 'd.add(' + self.schemName + ',' + 'd = \'right\',' + 'label = ' + '\'' +self.label + '\'' + ')'
+        return str
+
+    def __repr__(self):
+        str = 'd.add(' + self.schemName + ',' + 'd = \'right\',' + 'label = ' + '\'' + self.label + '\'' + ')'
         return str
 
     #change the label of the element

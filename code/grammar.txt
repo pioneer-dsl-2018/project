@@ -1,11 +1,13 @@
     expression: (set_label | connection)+
 
-    set_label: COMPONENT "is" label
+    set_label: components alias "is" label
     connection: "connect" components "in" CONNECTION_TYPE
 
-    components: COMPONENT | components "and" COMPONENT
+    components: alias | alias "and" alias
     label: NUMBER UNIT | NUMBER
+    alias: ALIAS
 
+    ALIAS: /[a-zA-Z_]\w*/
     COMPONENT: "capacitor" | "resistor" | "battery"
     CONNECTION_TYPE: "series" | "parallel"
     UNIT: /[a-zA-Z_]\w*/
