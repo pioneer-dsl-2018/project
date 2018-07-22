@@ -25,7 +25,7 @@ class circuit:
         d.add(e.LINE, d = 'right')
         for i in range(0, len(self.connection)):
             exec(str(self.connection[i]))
-        print(self.connection)
+        #print(self.connection)
         d.draw()
         d.save(ImageName)
 

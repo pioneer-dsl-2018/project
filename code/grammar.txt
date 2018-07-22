@@ -12,6 +12,8 @@
     CONNECTION_TYPE: "series" | "parallel"
     UNIT: /[a-zA-Z_]\w*/
     NUMBER: /0|[1-9]\d*/
+    COMMENT: /#[^\n]*/
 
     %import common.WS
+    %ignore COMMENT
     %ignore WS

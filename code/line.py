@@ -15,3 +15,9 @@ class line:
     # if the index is not given, it will insert the element at the beginning of the line
     def insertElement(self,element, index = 0):
         self.elements.insert(index, element)
+
+    def __str__(self):
+        return "{0}".format(self.elements)
+
+    def __repr__(self):
+        return "{0}".format(self.elements)

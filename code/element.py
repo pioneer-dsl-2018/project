@@ -17,7 +17,8 @@ class element:
         self.schemName = library[self.name]
 
     def __str__(self):
-        str = 'd.add(' + self.schemName + ',' + 'd = \'right\',' + 'label = ' + '\'' +self.label + '\'' + ')'
+        #str = "[name: "+ self.name + ", " + "label: " + self.label + ", " + "schemName: " + self.schemName +"]"
+        str = 'd.add(' + self.schemName + ',' + 'd = \'right\',' + 'label = ' + '\'' + self.label + '\'' + ')'
         return str
 
     def __repr__(self):
