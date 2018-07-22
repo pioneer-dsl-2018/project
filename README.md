@@ -15,26 +15,34 @@ After the packages are installed, download these files and put them in a place t
 $ python3 parser.py
 ```
 
-You should see a file called "output.png" generated in the dirctory and the prettified parse tree printed out in the terminal
+You should see a file called "output.png" generated in the dirctory and the prettified parse tree printed out in the terminal. Make sure the correct parse tree is printed out.
 ```
 expression
   set_label
-    capacitor
+    components
+      alias	capacitor
+    alias	tyler
     label
-      15
+      20000
       C
   set_label
-    resistor
+    components
+      alias	resistor
+    alias	Harry
     label
       15
       Om
   connection
     components
-      components	capacitor
-      resistor
+      alias	John
+      alias	tyler
     series
 
 Process finished with exit code 0
 
 ```
-The program is now successfully ran on your computer
+The output image should look exactly like this:
+
+![output](/code/output.png)
+
+The program is now successfully ran on your computer. Modify ```input.txt``` to make different outputs!
