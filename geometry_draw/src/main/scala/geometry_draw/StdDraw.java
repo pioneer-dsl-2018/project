@@ -1,3 +1,5 @@
+package geometry_draw;
+
 /******************************************************************************
  *  Compilation:  javac StdDraw.java
  *  Execution:    java StdDraw

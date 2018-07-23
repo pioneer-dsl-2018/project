@@ -1,5 +1,6 @@
+package geometry_draw
 
-object drawing {
+object example_1 {
   def main(args: Array[String]): Unit = {
     StdDraw.setPenRadius(0.005)
     StdDraw.setPenColor(StdDraw.BLACK)
@@ -21,4 +22,3 @@ object drawing {
     StdDraw.line(0.5, 0.5, 0.6, 0.5 + 0.1*math.sqrt(3))
   }
 }
-
