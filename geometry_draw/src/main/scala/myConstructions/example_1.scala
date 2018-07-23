@@ -1,4 +1,4 @@
-package geometry_draw
+package myConstructions
 
 object example_1 {
   def main(args: Array[String]): Unit = {

@@ -1,4 +1,5 @@
 import geometry_draw._
+package myConstructions
 
 object test_1 extends back_end {
   actions =
