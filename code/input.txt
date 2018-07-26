@@ -1,4 +1,6 @@
-capacitor John is 15 C
-resistor Harry is 15 m
-connect John and Harry in series
+resistor tyler is 20 Omega
+cell Harry is 999 V
+
+connect Harry and tyler in series
+
 #automatically print out the result
