@@ -46,3 +46,11 @@ The output image should look exactly like this:
 ![output](/code/output.png)
 
 The program is now successfully ran on your computer. Modify ```input.txt``` to make different outputs!
+
+## Units
+
+You can insert greek letters into this program, and no need to put dollar signs between them! For example:
+
+```
+Resistor Jack is 8 Omega
+```
