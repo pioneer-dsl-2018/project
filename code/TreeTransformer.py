@@ -16,7 +16,7 @@ class TreeTransformer(Transformer):
             elif item.data == "alias":
                 alias = item.children[0].value
             elif item.data == "label":
-                label = item.children[0] + '$\\' + item.children[1] + '$'
+                label = item.children[0] + '$' + item.children[1] + '$'
         return [alias, element(name, label)]
 
     def connection(self, items):

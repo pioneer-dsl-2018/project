@@ -19,17 +19,28 @@ print(parse_tree.pretty())
 #print(parse_tree)
 
 def process_tree(tree):
+    """
+        new_parse_tree
+         /    |    \
+        /     |     \
+      ele     ele   names
+
+    """
     c = circuit()
-    l1 = line()
-    for e in tree.children:
-        if type(e) is element:
-            l1.addElement(e)
-    c.connectInSeries(l1)
+    l = line()
+    names = tree.children[len(tree.children)-1]
+    for item in tree.children:
+        if item[0] in names and type(item[1]) is element:
+            l.addElement(item[1])
+        else:
+            pass
+            #raise SyntaxError("Alias {0} unreferrenced before assignment".format(item[0]))
+    c.connectInSeries(l)
     c.evaluate("output.png")
 
 new_tree = TreeTransformer().transform(parse_tree)
 
 print(new_tree)
 
-#process_tree(new_tree)
+process_tree(new_tree)
 
