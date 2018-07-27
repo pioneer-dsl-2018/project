@@ -16,7 +16,7 @@ parse_tree = parser.parse(program)
 
 #print the parse tree in the terminal
 print(parse_tree.pretty())
-print(parse_tree)
+#print(parse_tree)
 
 def process_tree(tree):
     c = circuit()

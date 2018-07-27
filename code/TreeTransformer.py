@@ -1,4 +1,4 @@
-from lark import Lark, Transformer
+from lark import Lark, Transformer, Tree
 from lark.lexer import Token
 from line import *
 from circuit import *
@@ -14,15 +14,18 @@ class TreeTransformer(Transformer):
             if item.data == "components":
                 name = item.children[0].children[0]
             elif item.data == "alias":
-                alias = item.children[0]
+                alias = item.children[0].value
             elif item.data == "label":
                 label = item.children[0] + '$\\' + item.children[1] + '$'
         return [alias, element(name, label)]
 
     def connection(self, items):
+        names = []
+        alias_connected = items[0].find_pred(lambda x: type(x.children[0]) == Token)
+        for alias in alias_connected:
+            names.append(alias.children[0].value)
         if items[1] == 'series':
-            series = []
-            for child in items[0].children:
-                series.append(child.children[0])
-            return series
+            return names
+        elif items[1] == 'parallel':
+            pass
 
