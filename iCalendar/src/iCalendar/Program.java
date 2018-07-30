@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.TimeZone;
 import java.util.regex.MatchResult;
@@ -22,6 +23,7 @@ import net.fortuna.ical4j.model.property.RRule;
 public class Program {
 	
 	static net.fortuna.ical4j.model.Calendar cal = new net.fortuna.ical4j.model.Calendar();
+	static HashMap<String, String> events = new HashMap<String, String>();
 	
 	public static void main(String[] args) throws ParseException {
 		
@@ -38,7 +40,14 @@ public class Program {
 			try {
 				s = new Scanner(new File("res/" + fileName + ".txt"));
 				while (s.hasNextLine()) {
-					parse(s.nextLine());
+					String str = s.nextLine();
+					Scanner token = new Scanner(str);
+					if (token.next().equals("Repeat")) {
+						parseRepeat(str);
+					} else {
+						parse(str);
+					}
+					
 				}
 			} catch (FileNotFoundException e) {
 				
@@ -48,6 +57,47 @@ public class Program {
 		System.out.println(cal.toString());
 	}
 	
+	private static void parseRepeat(String str) {
+		// Repeat: (Description) daily/weekly/monthly
+		int start = 9;
+		int end = 0;
+		for (int i = 0; i < str.length(); i++) {
+			if (str.charAt(i) == ')') {
+				end = i;
+			}
+		}
+		String lastWord = str.substring(str.lastIndexOf(" ") + 1);
+		String cropped = str.substring(end + 2);
+		if (lastWord.equalsIgnoreCase("daily")) {
+			
+			events.put(str.substring(start, end), parseDaily(cropped));
+			
+		} else if (lastWord.equalsIgnoreCase("weekly")) {
+			
+			events.put(str.substring(start, end), parseWeekly(cropped));
+			
+		} else if (lastWord.equalsIgnoreCase("monthly")) {
+			events.put(str.substring(start, end), parseMonthly(cropped));
+		} else {
+			System.out.println("{" + str + "}" + " is not a valid input.");
+		}
+	}
+
+	private static String parseDaily(String cropped) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private static String parseWeekly(String cropped) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private static String parseMonthly(String cropped) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	private static void parse(String str) {
 		String[] splited = str.split("\\s+");
 		int index = 0;
@@ -261,8 +311,10 @@ public class Program {
 	     
 	     DateTime startDT = new DateTime(start.getTime());
 	     DateTime endDT = new DateTime(end.getTime());
-	     
-	     cal.getComponents().add(new CEvent(startDT, endDT, description));
+	     CEvent e = new CEvent(startDT, endDT, description);
+	     events.put(description, "");
+	     cal.getComponents().add(e);
+	    
 	}
 }
 
