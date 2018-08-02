@@ -23,7 +23,8 @@ import net.fortuna.ical4j.model.property.RRule;
 public class Program {
 	
 	static net.fortuna.ical4j.model.Calendar cal = new net.fortuna.ical4j.model.Calendar();
-	static HashMap<String, String> events = new HashMap<String, String>();
+	static HashMap<String, CEvent> events = new HashMap<String, CEvent>();
+	static HashMap<String, CEvent> names = new HashMap<String, CEvent>();
 	
 	public static void main(String[] args) throws ParseException {
 		
@@ -42,8 +43,10 @@ public class Program {
 				while (s.hasNextLine()) {
 					String str = s.nextLine();
 					Scanner token = new Scanner(str);
-					if (token.next().equals("Repeat")) {
+					if (token.next().equals("Repeat:")) {
 						parseRepeat(str);
+						enterRepeat();
+						
 					} else {
 						parse(str);
 					}
@@ -57,8 +60,23 @@ public class Program {
 		System.out.println(cal.toString());
 	}
 	
+	private static void enterRepeat() throws ParseException {
+		
+		for (String key: events.keySet()) {
+			System.out.println(key);
+			
+			
+			String rule = key;
+			events.get(key).getProperties().add(new RRule("FREQ=DAILY;INTERVAL=1"));
+			
+		}
+		
+	}
+
 	private static void parseRepeat(String str) {
 		// Repeat: (Description) daily/weekly/monthly
+		// weekly -> weekly [mon, tue, fri] or weekly [wed, sat, sun]
+		// monthly -> monthly on day _ 
 		int start = 9;
 		int end = 0;
 		for (int i = 0; i < str.length(); i++) {
@@ -66,36 +84,54 @@ public class Program {
 				end = i;
 			}
 		}
-		String lastWord = str.substring(str.lastIndexOf(" ") + 1);
-		String cropped = str.substring(end + 2);
-		if (lastWord.equalsIgnoreCase("daily")) {
+		
+		
+		String description = str.substring(start, end);
+		for (String des : names.keySet()) {
+
 			
-			events.put(str.substring(start, end), parseDaily(cropped));
+		    if (des.equalsIgnoreCase(description)) {
+		    	CEvent temp = names.get(des);
+		    	
+		    	String crop = str.substring(end + 2);
+				String interval = "";
+				Scanner sc = new Scanner (crop);
+				String type = sc.next();
+				
+				
+				while (sc.hasNext()) {
+					interval += sc.next();
+					interval += " ";
+				}
+				sc.close();
+				if (type.equalsIgnoreCase("daily")) {
+					
+					events.put("FREQ=DAILY;INTERVAL=1", temp);
+					
+				} else if (type.equalsIgnoreCase("weekly")) {
+					
+					
+					events.put("FREQ=DAILY;INTERVAL=7", temp);
+					
+				} else if (type.equalsIgnoreCase("monthly")) {
+					
+					String code = temp.getStartDate().getDate().toString();
+					
+					int date = Integer.parseInt(code.substring(6, 8));
+					
+					events.put("FREQ=MONTHLY;BYMONTHDAY=" + date + ";INTERVAL=1", temp);
+					
+				} else {
+					System.out.println("{" + str + "}" + " is not a valid input.");
+				}
 			
-		} else if (lastWord.equalsIgnoreCase("weekly")) {
-			
-			events.put(str.substring(start, end), parseWeekly(cropped));
-			
-		} else if (lastWord.equalsIgnoreCase("monthly")) {
-			events.put(str.substring(start, end), parseMonthly(cropped));
-		} else {
-			System.out.println("{" + str + "}" + " is not a valid input.");
+		    } else {
+		    	
+		    }
 		}
-	}
-
-	private static String parseDaily(String cropped) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private static String parseWeekly(String cropped) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private static String parseMonthly(String cropped) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		
+		
 	}
 
 	private static void parse(String str) {
@@ -245,8 +281,11 @@ public class Program {
 	     
 	     DateTime startDT = new DateTime(start.getTime());
 	     DateTime endDT = new DateTime(end.getTime());
+	     CEvent e = new CEvent(startDT, endDT, description);
+	   
+	     names.put(description, e);
 	     
-	     cal.getComponents().add(new CEvent(startDT, endDT, description));
+	     cal.getComponents().add(e);
 	}
 
 
@@ -312,7 +351,8 @@ public class Program {
 	     DateTime startDT = new DateTime(start.getTime());
 	     DateTime endDT = new DateTime(end.getTime());
 	     CEvent e = new CEvent(startDT, endDT, description);
-	     events.put(description, "");
+	    
+	     names.put(description, e);
 	     cal.getComponents().add(e);
 	    
 	}
