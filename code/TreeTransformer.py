@@ -25,7 +25,7 @@ class TreeTransformer(Transformer):
         for alias in alias_connected:
             names.append(alias.children[0].value)
         if items[1] == 'series':
-            return names
+            return [names, 'series']
         elif items[1] == 'parallel':
-            pass
+            return [names, 'parallel']
 

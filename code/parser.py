@@ -28,15 +28,21 @@ def process_tree(tree):
     """
     c = circuit()
     l = line()
-    names = tree.children[len(tree.children)-1]
-    for item in tree.children:
-        if item[0] in names and type(item[1]) is element:
-            l.addElement(item[1])
-        else:
-            pass
-            #raise SyntaxError("Alias {0} unreferrenced before assignment".format(item[0]))
-    c.connectInSeries(l)
-    c.evaluate("output.png")
+    names = tree.children[len(tree.children)-1][0]
+    connection = tree.children[len(tree.children)-1][1]
+    if connection == "series":
+        for item in tree.children:
+            if item[0] in names and type(item[1]) is element:
+                l.addElement(item[1])
+            else:
+                pass
+                #raise SyntaxError("Alias {0} unreferrenced before assignment".format(item[0]))
+    elif connection == "parallel":
+        l1 = line()
+
+    print(connection)
+    #c.connectInSeries(l)
+    #c.evaluate("output.png")
 
 new_tree = TreeTransformer().transform(parse_tree)
 

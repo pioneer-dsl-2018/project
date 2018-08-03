@@ -1,6 +1,7 @@
-resistor tyler is 20 Omega
 cell Harry is 999 V
+resistor tyler is 20 Omega
 
-connect Harry and tyler in series
+connect Harry and tyler in parallel
 
-#automatically print out the result
+# comments
+# automatically print out the result

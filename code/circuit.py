@@ -9,6 +9,11 @@ class circuit:
 
     #connect lines in parallel
     def connectInParallel(self, *lines):
+        max_length = 0
+        for l in lines:
+            if len(l) > max_length:
+                max_length = len(l)
+        print(max_length)
         for l in lines:
             self.connection.append(l)
 
@@ -17,12 +22,9 @@ class circuit:
         for l in lines:
             self.connection.extend(l.elements)
 
-    # There will be more methods to add a new line, or change the order of a line
-
     # 'ImageName' is the filename of the generated image'
     def evaluate(self, ImageName):
         d = SchemDraw.Drawing()
-        d.add(e.LINE, d = 'right')
         for i in range(0, len(self.connection)):
             exec(str(self.connection[i]))
         #print(self.connection)
