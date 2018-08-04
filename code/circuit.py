@@ -9,11 +9,6 @@ class circuit:
 
     #connect lines in parallel
     def connectInParallel(self, *lines):
-        max_length = 0
-        for l in lines:
-            if len(l) > max_length:
-                max_length = len(l)
-        print(max_length)
         for l in lines:
             self.connection.append(l)
 
@@ -27,7 +22,6 @@ class circuit:
         d = SchemDraw.Drawing()
         for i in range(0, len(self.connection)):
             exec(str(self.connection[i]))
-        #print(self.connection)
         d.draw()
         d.save(ImageName)
 
