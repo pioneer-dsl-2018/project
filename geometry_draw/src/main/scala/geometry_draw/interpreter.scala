@@ -3,10 +3,12 @@ package geometry_draw
 
 package object back {
   def evaluate(action: Action): Unit = action match {
-    case DrawWithRuler(point_a, point_b) ⇒ println("Xxx")
-//      StdDraw.setPenRadius(0.005)
-//      StdDraw.setPenColor(StdDraw.BLACK)
-//      StdDraw.line(point_a.x_coordinate, point_a.y_coordinate, point_b.x_coordinate, point_b.y_coordinate)
+    case Num(i) => i.toDouble
+
+    case DrawWithRuler(point_a, point_b) ⇒
+      StdDraw.setPenRadius(0.005)
+      StdDraw.setPenColor(StdDraw.BLACK)
+      StdDraw.line(point_a.x_coordinate, point_a.y_coordinate, point_b.x_coordinate, point_b.y_coordinate)
 
 
     case DrawWithCompass(center, radius, rotation_property) =>
@@ -27,16 +29,6 @@ package object back {
 
   }
 }
-
-//class back_end(var actions: List[Action] = List()) {
-//  def evaluate(action: Action): Unit = action match {
-//    case DrawWithRuler(point_a, point_b) => {
-//      StdDraw.setPenRadius(0.005)
-//      StdDraw.setPenColor(StdDraw.BLACK)
-//      StdDraw.line(point_a.x_coordinate, point_a.y_coordinate, point_b.x_coordinate, point_b.y_coordinate)
-//    }
-//  }
-//}
 
 
 

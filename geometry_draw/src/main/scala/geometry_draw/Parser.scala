@@ -5,19 +5,68 @@ import scala.util.parsing.combinator._
 /*
 Grammar Design
 
-Draw with Ruler from Point_1 to Point_2
-Draw with Compass clockwise from Point_3 with radius 5 from 0 to 80
-Mark Point_1 as Apple
-Change Point_1 color to black
+Action ::= Draw | Mark | Set | Move
+  Draw   ::= ruler | compass
+    ruler  ::= 'draw' 'line' 'with' 'Ruler' 'from' pointName 'to' pointName
+    compass ::= 'draw' 'arc' 'with' 'Compass' direction 'from' pointname 'with' 'radius' number 'from' number 'to' number
+  Mark   ::= point | line | (arc)
+    point ::= 'mark' 'point' pointname 'as' Name
+    line  ::= 'mark' 'line' 'from' pointname 'to' pointname 'as' Name
+  Move   ::= point | line | (arc)
+    point ::= 'move' 'point' NAME command number
+    line  ::= 'move' 'line' NAME command number
+  Set   ::=  point | line | (arc)
+    point ::= 'set' 'point' NAME character 'to' (number/string)
+    line  ::= 'set' 'line' NAME character 'to'  (number/string)
+
+direction ::= 'clockwise' | 'counter-clockwise'
+pointname ::= <identifier>
+number    ::= <number>
+NAME      ::= <String-identifier>(?) #Ex. Mike(NAME) represents point(2,3)
+character ::= 'color' | 'thickness'
+command   ::= 'upward' | 'downward' | 'leftward' | 'rightward'
 
 */
 
 object Parser extends JavaTokenParsers with PackratParsers{
-  def apply(s: String): ParseResult[Expr] = parseAll(action, s)
 
-  lazy val action: PackratParser[Expr] =
-    (   "Draw with Ruler from"~expr~"to"~fact ^^ {case "Draw with Ruler from"~a~"to"~b ⇒ DrawWithRuler(a, b)}
-      | fact )
+  // parsing interface
+  def apply(s: String): ParseResult[Action] = parseAll(action, s)
 
+  // expressions
+  lazy val action: PackratParser[Action] =
+    (   draw | mark | set | move )
+
+  lazy val draw: PackratParser[Action] =
+    ( ruler | compass )
+
+  lazy val ruler: PackratParser[Action] =
+    ( "draw line with Ruler from"~point~"to"~point ^^ {case "draw line with Ruler from"~l~"to"~r ⇒ DrawWithRuler(l, r)})
+
+  lazy val compass: PackratParser[Action] =
+    ("draw arc with Compass"~direction~"from"~point~"with radius"~number~"from"~number~"to"~number ^^ {case "draw arc with Compass"~a~"from"~b~"with radius"~c~"from"~d~"to"~e ⇒ DrawWithCompass(b, c, Rotation(d,e,a))})
+
+  lazy val mark: PackratParser[Action] =
+    ( point | line )
+//  lazy val point: PackratParser[Action] =
+//   ("mark point"~point~"as"~NAME ^^ {case "mark point"~a~"as"~b => MarkThePoint(a, b)})
+//  lazy val point: PackratParser[Action] =
+//    ("mark line"~line~"as"~NAME ^^ {case "mark point"~a~"as"~b => MarkThePoint(a, b)})
+
+//  lazy val move: PackratParser[Action] =
+//    ( point | line )
+
+//  lazy val set: PackratParser[Action] =
+//    ( point | line )
+
+  lazy val direction: Parser[String] = "clockwise" | "counter-clockwise"
+  lazy val point: Parser[Point] = Point(number.toString().toDouble, number.toString().toDouble)
+  lazy val number: Parser[Double] =
+//  lazy val pointname: []=
+  lazy val character: Parser[String] = "color" | "thickness"
+  lazy val command: Parser[String] = "upward" | "downward" | "leftward" | "rightward"
+
+  def number: Parser[Double] = number
 
 }
+
