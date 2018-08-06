@@ -1,2 +1,6 @@
-Robotics meet: Sturts at 5:30 p.m. Ends at 8:00 p.m. Beginning date: 8/31/2018
-Track meet: Sturts at 6:30 p.m. Ends at 9:00 p.m. Beginning date: 8/31/2018
+Robotics meet: Starts at 5:30 p.m. Ends at 8:00 p.m. Beginning date: 8/31/2018
+Tracking meet: Starts at 18:30 Ends at 20:00 Beginning date: 8/31/2018
+Swimming: Starts at 18:30 Ends at 20:00 Beginning date: 8/31/2018
+Repeat: (Tracking meet) daily
+ADE: (School Day) on 6/18/2015
+Repeat: (School Day) daily

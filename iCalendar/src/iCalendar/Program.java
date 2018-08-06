@@ -43,15 +43,16 @@ public class Program {
 				while (s.hasNextLine()) {
 					String str = s.nextLine();
 					Scanner token = new Scanner(str);
-					if (token.next().equals("Repeat:")) {
+					String identifier = token.next();
+					if (identifier.equalsIgnoreCase("Repeat:")) {
 						parseRepeat(str);
 						enterRepeat();
 						
-					} else {
-						parse(str);
+					} else if (identifier.equalsIgnoreCase("ADE:")) {
+						parseADE(str.substring(5));
+					} else
+						parse(str);	
 					}
-					
-				}
 			} catch (FileNotFoundException e) {
 				
 				e.printStackTrace();
@@ -60,14 +61,30 @@ public class Program {
 		System.out.println(cal.toString());
 	}
 	
+	private static void parseADE(String str) {
+		System.out.println(str);
+		int end = 0;
+		for (int i = 0; i < str.length(); i++) {
+			if (str.charAt(i) == ')') {
+				end = i;
+			}
+		}
+		
+		String description = str.substring(1, end);
+		
+		String date = str.substring(end + 5);
+		System.out.println(date);
+		CEvent e = new CEvent(date, description);
+		names.put(description, e);
+		cal.getComponents().add(e);
+	}
+
 	private static void enterRepeat() throws ParseException {
 		
 		for (String key: events.keySet()) {
-			System.out.println(key);
-			
 			
 			String rule = key;
-			events.get(key).getProperties().add(new RRule("FREQ=DAILY;INTERVAL=1"));
+			events.get(key).getProperties().add(new RRule(rule));
 			
 		}
 		

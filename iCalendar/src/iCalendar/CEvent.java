@@ -11,6 +11,7 @@ import net.fortuna.ical4j.model.component.VEvent;
 public class CEvent extends VEvent{
 	
  	private VEvent result;
+ 
 	java.util.Calendar cal = new GregorianCalendar();
 	
 
@@ -24,8 +25,13 @@ public class CEvent extends VEvent{
 	}
 
 	public CEvent(DateTime startDT, DateTime endDT, String description) {
-		// TODO Auto-generated constructor stub
+		
 		super(startDT, endDT, description);
+		
+	}
+	
+	public CEvent(String date, String description) {
+		super(new Date(new date(date).getTime()), description);
 	}
 
 }
