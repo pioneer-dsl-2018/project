@@ -2,14 +2,16 @@ package geometry_draw
 
 
 package object back {
+  def DrawWithRuler_do(a: Point, b: Point): Unit = {
+    StdDraw.setPenRadius(0.005)
+    StdDraw.setPenColor(StdDraw.BLACK)
+    StdDraw.line(a.x_coordinate, a.y_coordinate, b.x_coordinate, b.y_coordinate)
+  }
+
   def evaluate(action: Action): Unit = action match {
     case Num(i) => i.toDouble
 
-    case DrawWithRuler(point_a, point_b) ⇒
-      StdDraw.setPenRadius(0.005)
-      StdDraw.setPenColor(StdDraw.BLACK)
-      StdDraw.line(point_a.x_coordinate, point_a.y_coordinate, point_b.x_coordinate, point_b.y_coordinate)
-
+    case DrawWithRuler(point_a, point_b) ⇒ DrawWithRuler_do(point_a,point_b)
 
     case DrawWithCompass(center, radius, rotation_property) =>
       StdDraw.setPenRadius(0.005)
@@ -26,8 +28,15 @@ package object back {
       StdDraw.setPenColor(StdDraw.BLACK)
       StdDraw.point(point_a.x_coordinate, point_a.y_coordinate)
 
-
   }
+
+
+
+
+
+
+
+
 }
 
 

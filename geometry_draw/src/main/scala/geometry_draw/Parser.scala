@@ -35,19 +35,19 @@ object Parser extends JavaTokenParsers with PackratParsers{
 
   // expressions
   lazy val action: PackratParser[Action] =
-    (   draw | mark | set | move )
+       draw
 
   lazy val draw: PackratParser[Action] =
-    ( ruler | compass )
+     ruler | compass
 
   lazy val ruler: PackratParser[Action] =
-    ( "draw line with Ruler from"~point~"to"~point ^^ {case "draw line with Ruler from"~l~"to"~r ⇒ DrawWithRuler(l, r)})
+     "draw line with Ruler from "~point~" to "~point ^^ {case "draw line with Ruler from"~l~"to"~r ⇒ DrawWithRuler(l, r)}
 
   lazy val compass: PackratParser[Action] =
-    ("draw arc with Compass"~direction~"from"~point~"with radius"~number~"from"~number~"to"~number ^^ {case "draw arc with Compass"~a~"from"~b~"with radius"~c~"from"~d~"to"~e ⇒ DrawWithCompass(b, c, Rotation(d,e,a))})
+    "draw arc with Compass"~direction~"from"~point~"with radius"~number~"from"~number~"to"~number ^^ {case "draw arc with Compass"~a~"from"~b~"with radius"~c~"from"~d~"to"~e ⇒ DrawWithCompass(b, c, Rotation(d,e,Direction(a)))}
 
-  lazy val mark: PackratParser[Action] =
-    ( point | line )
+//  lazy val mark: PackratParser[Action] =
+//     point | line
 //  lazy val point: PackratParser[Action] =
 //   ("mark point"~point~"as"~NAME ^^ {case "mark point"~a~"as"~b => MarkThePoint(a, b)})
 //  lazy val point: PackratParser[Action] =
@@ -60,9 +60,9 @@ object Parser extends JavaTokenParsers with PackratParsers{
 //    ( point | line )
 
   lazy val direction: Parser[String] = "clockwise" | "counter-clockwise"
-  lazy val point: Parser[Point] = Point(number.toString().toDouble, number.toString().toDouble)
-  lazy val number: Parser[Double] =
-//  lazy val pointname: []=
+  lazy val point: PackratParser[Point] = "(" ~ decimalNumber ~ "," ~ decimalNumber ~ ")" ^^ {case "(" ~ x ~ "," ~ y ~")" ⇒ Point(x.toDouble, y.toDouble)}
+//  lazy val number: Parser[Double] = decimalNumber ^^ {case a => Num(a)}
+//  lazy val NAME: PackratParser[name]=
   lazy val character: Parser[String] = "color" | "thickness"
   lazy val command: Parser[String] = "upward" | "downward" | "leftward" | "rightward"
 
