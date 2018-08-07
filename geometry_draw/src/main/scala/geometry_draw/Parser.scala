@@ -41,7 +41,7 @@ object Parser extends JavaTokenParsers with PackratParsers{
      ruler | compass
 
   lazy val ruler: PackratParser[Action] =
-     "draw line with Ruler from "~point~" to "~point ^^ {case "draw line with Ruler from"~l~"to"~r ⇒ DrawWithRuler(l, r)}
+    "draw line with Ruler from "~point~" to "~point ^^ {case "draw line with Ruler from"~l~"to"~r ⇒ DrawWithRuler(l, r)}
 
   lazy val compass: PackratParser[Action] =
     "draw arc with Compass"~direction~"from"~point~"with radius"~number~"from"~number~"to"~number ^^ {case "draw arc with Compass"~a~"from"~b~"with radius"~c~"from"~d~"to"~e ⇒ DrawWithCompass(b, c, Rotation(d,e,Direction(a)))}
