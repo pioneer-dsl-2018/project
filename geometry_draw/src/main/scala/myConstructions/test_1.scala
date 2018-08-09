@@ -11,7 +11,7 @@ object test_1 extends EvalLoop with App {
   loop { line ⇒
     Parser(line) match {
       case Parser.Success(action, _) ⇒ evaluate(action)
-      case e: Parser.NoSuccess  ⇒ println("error")
+      case e: Parser.NoSuccess  ⇒ println(e)
     }
   }
 }
