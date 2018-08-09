@@ -62,7 +62,7 @@ public class Program {
 	}
 	
 	private static void parseADE(String str) {
-		System.out.println(str);
+	
 		int end = 0;
 		for (int i = 0; i < str.length(); i++) {
 			if (str.charAt(i) == ')') {
@@ -73,13 +73,14 @@ public class Program {
 		String description = str.substring(1, end);
 		
 		String date = str.substring(end + 5);
-		System.out.println(date);
+		
 		CEvent e = new CEvent(date, description);
 		names.put(description, e);
 		cal.getComponents().add(e);
 	}
 
 	private static void enterRepeat() throws ParseException {
+		
 		
 		for (String key: events.keySet()) {
 			
@@ -109,18 +110,9 @@ public class Program {
 			
 		    if (des.equalsIgnoreCase(description)) {
 		    	CEvent temp = names.get(des);
-		    	
-		    	String crop = str.substring(end + 2);
-				String interval = "";
-				Scanner sc = new Scanner (crop);
-				String type = sc.next();
+		    
+				String type = str.substring(str.lastIndexOf(" ") + 1);
 				
-				
-				while (sc.hasNext()) {
-					interval += sc.next();
-					interval += " ";
-				}
-				sc.close();
 				if (type.equalsIgnoreCase("daily")) {
 					
 					events.put("FREQ=DAILY;INTERVAL=1", temp);
@@ -138,7 +130,56 @@ public class Program {
 					
 					events.put("FREQ=MONTHLY;BYMONTHDAY=" + date + ";INTERVAL=1", temp);
 					
+				} else if (type.equalsIgnoreCase("days")) {
+					
+					String[] words = str.split(" ");
+					String penultimate = words[words.length - 2];
+					  try
+				        {
+				            int interval = Integer.parseInt(penultimate);
+				            events.put("FREQ=DAILY;INTERVAL=" + interval, temp);
+				            
+				        } 
+				        catch (NumberFormatException e) 
+				        {
+				            System.out.println(penultimate + " is not a valid integer number");
+				        }
+					
+				} else if (type.equalsIgnoreCase("weeks")) {
+					
+					String[] words = str.split(" ");
+					String penultimate = words[words.length - 2];
+					  try
+				        {
+				            int interval = Integer.parseInt(penultimate);
+				            events.put("FREQ=DAILY;INTERVAL=" + interval * 7, temp);
+				            
+				        } 
+				        catch (NumberFormatException e) 
+				        {
+				            System.out.println(penultimate + " is not a valid integer number");
+				        }
+					
+				} else if (type.equalsIgnoreCase("months")) {
+					
+					String[] words = str.split(" ");
+					String penultimate = words[words.length - 2];
+					  try
+				        {
+						  String code = temp.getStartDate().getDate().toString();
+						  int date = Integer.parseInt(code.substring(6, 8));
+						  int interval = Integer.parseInt(penultimate);
+						  
+				          events.put("FREQ=MONTHLY;BYMONTHDAY=" + date + ";INTERVAL=" + interval, temp); 
+				            
+				        } 
+				        catch (NumberFormatException e) 
+				        {
+				            System.out.println(penultimate + " is not a valid integer number");
+				        }
+					
 				} else {
+				
 					System.out.println("{" + str + "}" + " is not a valid input.");
 				}
 			
