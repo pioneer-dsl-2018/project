@@ -49,7 +49,6 @@ def process_tree(tree):
 
 
     #c.connectInSeries(l)
-    #c.connectInParallel(l, l1)
     print(c.connection)
     #c.evaluate("output.png")
 

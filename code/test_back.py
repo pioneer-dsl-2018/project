@@ -6,7 +6,8 @@ from element import *
 
 # This 'library' converts names to SchemeDraw library names
 # There should be more elements this Dictionary
-library = {'Capacitor':'e.CAP','Resistor':'e.RES', 'Cell': 'e.BAT_CELL','Battery':'e.BATTERY', 'Dot':'e.DOT','Switch':'e.SWITCH_SPST'}
+library = {'Capacitor':'e.CAP','Resistor':'e.RES', 'Cell': 'e.BAT_CELL','Battery':'e.BATTERY', 'Dot':'e.DOT','Switch':'e.SWITCH_SPST',
+           'Line': "e.LINE"}
 
 
 # Main
@@ -19,6 +20,10 @@ l1.addElement(cap)                           # add the capacitor element to l1
 c.connectInSeries(l1)
 c.evaluate("output.png")
 '''
+
+
+
+
 
 
 
