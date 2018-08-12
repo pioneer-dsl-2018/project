@@ -1,7 +1,7 @@
 cell Harry is 999 V
 resistor tyler is 20 Omega
 
-connect Harry and tyler in parallel
+connect Harry and tyler in series
 
 # comments
 # automatically print out the result

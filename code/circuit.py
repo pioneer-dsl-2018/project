@@ -5,7 +5,6 @@ class circuit:
 
     #Constructors
     def __init__(self):
-        # a list of lines. The line should be in order
         self.connection = []
         self.max_length = 0
 
@@ -15,7 +14,7 @@ class circuit:
         for l in lines:
             self.connection.append(l)
 
-        def max_length(self):
+        def find_max_length(self):
             nonlocal max_length
             for l in self.connection:
                 if l.length > max_length:
@@ -23,11 +22,11 @@ class circuit:
                     self.max_length = max_length
 
             for l in self.connection:
-                if len(l) < max_length:
+                if l.length < max_length:
                     e = element('line')
                     l.addElement(e)
 
-        return max_length(self)
+        return find_max_length(self)
 
     #connect lines in series
     def connectInSeries(self, *lines):
@@ -37,20 +36,24 @@ class circuit:
     # 'ImageName' is the filename of the generated image'
     def evaluate(self, ImageName):
         d = SchemDraw.Drawing()
-        #for i in range(0, len(self.connection)):
-        #    exec(str(self.connection[i]))
         d.push()
-        d.add(e.SOURCE_V, d='right', label='10V')
-        d.add(e.LINE, d='down')
-        d.pop()
-        d.add(e.LINE, d='down')
-        d.add(e.RES, d='right', label='100K$\Omega$')
-        # recursively add a line object
-        d.push()
-        d.add(e.LINE, d='down')
-        d.add(e.RES, d='left', label='12$\Omega$')
-        d.add(e.LINE, d='up')
-        d.pop()
+        for i in range(0, self.connection[0].length):
+            exec(str(self.connection[0].elements[i]))
+        if self.connection[1] is not None:
+            d.add(e.LINE, d='down')
+            d.pop()
+            d.add(e.LINE, d='down')
+            for i in range(0, self.connection[1].length):
+                exec(str(self.connection[1].elements[i]))
+
+            # iteratively add lines
+            for i in range(2, len(self.connection)):
+                d.push()
+                d.add(e.LINE, d='down')
+                for j in range(0, self.connection[i].length):
+                    exec(str(self.connection[i].elements[j]))
+                d.add(e.LINE, d='up')
+                d.pop()
         #print(self.connection)
         d.draw()
         d.save(ImageName)

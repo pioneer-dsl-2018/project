@@ -50,7 +50,7 @@ def process_tree(tree):
 
     #c.connectInSeries(l)
     print(c.connection)
-    #c.evaluate("output.png")
+    c.evaluate("output.png")
 
 new_tree = TreeTransformer().transform(parse_tree)
 

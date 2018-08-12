@@ -20,7 +20,5 @@ class line:
         self.length += 1
 
     def __str__(self):
-        return "{0}".format(self.elements)
+        return "these are element in this line: {0}".format(self.elements)
 
-    def __repr__(self):
-        return "{0}".format(self.elements)
