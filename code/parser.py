@@ -38,7 +38,9 @@ def process_tree(tree):
                 l = l1
             else:
                 pass
+        c.connectInSeries(l)
                 #raise SyntaxError("Alias {0} unreferrenced before assignment".format(item[0]))
+
     elif connection == "parallel":
         for item in tree.children:
             if item[0] in names and type(item[1]) is element:
@@ -49,8 +51,7 @@ def process_tree(tree):
                 pass
                 #raise SyntaxError("Alias {0} unreferrenced before assignment".format(item[0]))
 
-    c.connectInSeries(l)
-    print(c.connection)
+
     c.evaluate("output.png")
 
 new_tree = TreeTransformer().transform(parse_tree)

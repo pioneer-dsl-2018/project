@@ -40,14 +40,16 @@ class circuit:
         d.push()
         for i in range(0, self.connection[0].length):
             exec(str(self.connection[0].elements[i]))
+
+        # deals with parallel situations
         if len(self.connection) > 1 :
             d.add(e.LINE, d='down')
             d.pop()
             d.add(e.LINE, d='down')
             for i in range(0, self.connection[1].length):
                 exec(str(self.connection[1].elements[i]))
-            # iteratively add lines
 
+            # iteratively add lines
             for i in range(2, len(self.connection)):
                 d.push()
                 d.add(e.LINE, d='down')
@@ -57,7 +59,21 @@ class circuit:
                 d.add(e.LINE, d='up')
                 d.pop()
 
+
         #print(self.connection)
         d.draw()
         d.save(ImageName)
+
+    def __str__(self):
+        string = ''
+        for l in self.connection:
+            string += str(l)
+        return string
+
+    def __repr__(self):
+        string = ''
+        for l in self.connection:
+            string += str(l)
+        return string
+
 
