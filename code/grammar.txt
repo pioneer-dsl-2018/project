@@ -2,12 +2,14 @@
 
     set_label: components alias "is" label
     connection: "connect" components "in" CONNECTION_TYPE
+    mutation: MUTATE components "to" components
 
     components: alias | alias "and" alias
     label: NUMBER UNIT | NUMBER
     alias: ALIAS
 
     ALIAS: /[a-zA-Z_]\w*/
+    MUTATE: "add" | "drop"
     COMPONENT: "capacitor" | "resistor" | "battery"
     CONNECTION_TYPE: "series" | "parallel"
     UNIT: /[a-zA-Z_]\w*/

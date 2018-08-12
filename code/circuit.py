@@ -47,15 +47,16 @@ class circuit:
             for i in range(0, self.connection[1].length):
                 exec(str(self.connection[1].elements[i]))
             # iteratively add lines
-            '''
+
             for i in range(2, len(self.connection)):
                 d.push()
                 d.add(e.LINE, d='down')
                 for j in range(0, self.connection[i].length):
+                    self.connection[i].elements[j].setDirection('left')
                     exec(str(self.connection[i].elements[j]))
                 d.add(e.LINE, d='up')
                 d.pop()
-            '''
+
         #print(self.connection)
         d.draw()
         d.save(ImageName)
