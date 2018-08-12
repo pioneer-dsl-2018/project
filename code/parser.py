@@ -28,8 +28,12 @@ def process_tree(tree):
     """
     c = circuit()
     l = line()
+    ############################change this three lines!!
     names = tree.children[len(tree.children)-1][0]
-    connection = tree.children[len(tree.children)-1][1]
+    connection = tree.children[len(tree.children)-2][1]
+    mutation = tree.children[len(tree.children)-1][1]
+    ############################
+    print(mutation)
     if connection == "series":
         l1 = line()
         for item in tree.children:
@@ -39,7 +43,7 @@ def process_tree(tree):
             else:
                 pass
         c.connectInSeries(l)
-                #raise SyntaxError("Alias {0} unreferrenced before assignment".format(item[0]))
+                #raise SyntaxError("Alias {0} referrenced before assignment".format(item[0]))
 
     elif connection == "parallel":
         for item in tree.children:
@@ -49,14 +53,40 @@ def process_tree(tree):
                 c.connectInParallel(l)
             else:
                 pass
-                #raise SyntaxError("Alias {0} unreferrenced before assignment".format(item[0]))
-
+                #raise SyntaxError("Alias {0} referrenced before assignment".format(item[0]))
+    elif connection == "add_parallel":
+        for item in tree.children:
+            if item[0] in names and type(item[1]) is element:
+                l = line()
+                l.addElement(item[1])
+                c.connectInParallel(l)
+            else:
+                pass
+                #raise SyntaxError("Alias {0} referrenced before assignment".format(item[0]))
+    if mutation == "add_parallel":
+        for item in tree.children:
+            if item[0] in names and type(item[1]) is element:
+                l = line()
+                l.addElement(item[1])
+                c.connectInParallel(l)
+            else:
+                pass
+                #raise SyntaxError("Alias {0} referrenced before assignment".format(item[0]))
+    if mutation == "add_series":
+        l1 = line()
+        for item in tree.children:
+            if item[0] in names and type(item[1]) is element:
+                l1.addElement(item[1])
+                l = l1
+            else:
+                pass
+        c.connectInSeries(l)
 
     c.evaluate("output.png")
 
 new_tree = TreeTransformer().transform(parse_tree)
 
-print(new_tree)
+#print(new_tree)
 
 process_tree(new_tree)
 

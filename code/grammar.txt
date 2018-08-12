@@ -1,8 +1,8 @@
-    expression: (set_label | connection)+
+    expression: (set_label | connection | mutation)+
 
-    set_label: components alias "is" label
+    set_label: components alias "is" label | components alias
     connection: "connect" components "in" CONNECTION_TYPE
-    mutation: MUTATE components "to" components
+    mutation: MUTATE components "to" components "in" CONNECTION_TYPE
 
     components: alias | alias "and" alias
     label: NUMBER UNIT | NUMBER

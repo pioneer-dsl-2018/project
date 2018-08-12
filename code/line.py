@@ -25,5 +25,13 @@ class line:
     def __repr__(self) -> str:
         return "these are element in this line: {0}".format(self.elements)
 
+    def __contains__(self, element):
+        for e in self.elements:
+            if isinstance(e, element):
+                return True
+        return False
+
+
+
 
 

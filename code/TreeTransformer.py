@@ -31,4 +31,14 @@ class TreeTransformer(Transformer):
 
     def mutation(selfs, items):
         names = []
-
+        alias_already_connected = items[2].find_pred(lambda x: type(x.children[0]) == Token)
+        for alias in alias_already_connected:
+            names.append(alias.children[0].value)
+        alias_connected = items[1].find_pred(lambda x: type(x.children[0]) == Token)
+        for alias in alias_connected:
+            names.append(alias.children[0].value)
+        if items[0] == 'add':
+            if items[3] == 'series':
+                return [names, 'add_series']
+            elif items[3] == 'parallel':
+                return [names, 'add_parallel']
