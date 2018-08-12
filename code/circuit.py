@@ -1,5 +1,6 @@
 import SchemDraw
 from element import *
+from line import *
 import SchemDraw.elements as e
 class circuit:
 
@@ -31,7 +32,7 @@ class circuit:
     #connect lines in series
     def connectInSeries(self, *lines):
         for l in lines:
-            self.connection.extend(l.elements)
+            self.connection.append(l)
 
     # 'ImageName' is the filename of the generated image'
     def evaluate(self, ImageName):
@@ -39,14 +40,14 @@ class circuit:
         d.push()
         for i in range(0, self.connection[0].length):
             exec(str(self.connection[0].elements[i]))
-        if self.connection[1] is not None:
+        if len(self.connection) > 1 :
             d.add(e.LINE, d='down')
             d.pop()
             d.add(e.LINE, d='down')
             for i in range(0, self.connection[1].length):
                 exec(str(self.connection[1].elements[i]))
-
             # iteratively add lines
+            '''
             for i in range(2, len(self.connection)):
                 d.push()
                 d.add(e.LINE, d='down')
@@ -54,6 +55,7 @@ class circuit:
                     exec(str(self.connection[i].elements[j]))
                 d.add(e.LINE, d='up')
                 d.pop()
+            '''
         #print(self.connection)
         d.draw()
         d.save(ImageName)

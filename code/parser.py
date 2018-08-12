@@ -31,9 +31,11 @@ def process_tree(tree):
     names = tree.children[len(tree.children)-1][0]
     connection = tree.children[len(tree.children)-1][1]
     if connection == "series":
+        l1 = line()
         for item in tree.children:
             if item[0] in names and type(item[1]) is element:
-                l.addElement(item[1])
+                l1.addElement(item[1])
+                l = l1
             else:
                 pass
                 #raise SyntaxError("Alias {0} unreferrenced before assignment".format(item[0]))
@@ -47,8 +49,7 @@ def process_tree(tree):
                 pass
                 #raise SyntaxError("Alias {0} unreferrenced before assignment".format(item[0]))
 
-
-    #c.connectInSeries(l)
+    c.connectInSeries(l)
     print(c.connection)
     c.evaluate("output.png")
 
