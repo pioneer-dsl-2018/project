@@ -29,71 +29,59 @@ def process_tree(tree):
     c = circuit()
     l = line()
     names = {}
-    procedure = []
+    procedures = []
     for lst in tree.children:
         if type(lst[0]) is str:
             names[lst[0]] = lst[1]
         else:
-            procedure.append(lst)
-    print(names)
-    print(procedure)
+            procedures.append(lst)
+    #print(names)
+    #print(procedures)
 
-    ############################change this three lines!!
-    names = tree.children[len(tree.children)-1][0]
-    connection = tree.children[len(tree.children)-2][1]
-    mutation = tree.children[len(tree.children)-1][1]
-    ############################
+    for proc in procedures:
 
-    if connection == "series":
-        l1 = line()
-        for item in tree.children:
-            if item[0] in names and type(item[1]) is element:
-                l1.addElement(item[1])
-                l = l1
-            else:
-                pass
-        c.connectInSeries(l)
-                #raise SyntaxError("Alias {0} referrenced before assignment".format(item[0]))
+        proc_elements_names = proc[0]
+        proc_name = proc[1]
 
-    elif connection == "parallel":
-        for item in tree.children:
-            if item[0] in names and type(item[1]) is element:
-                l = line()
-                l.addElement(item[1])
-                c.connectInParallel(l)
-            else:
-                pass
-                #raise SyntaxError("Alias {0} referrenced before assignment".format(item[0]))
-    elif connection == "add_parallel":
-        for item in tree.children:
-            if item[0] in names and type(item[1]) is element:
-                l = line()
-                l.addElement(item[1])
-                c.connectInParallel(l)
-            else:
-                pass
-                #raise SyntaxError("Alias {0} referrenced before assignment".format(item[0]))
-    if mutation == "add_parallel":
-        for item in tree.children:
-            if item[0] in names and type(item[1]) is element:
-                l = line()
-                l.addElement(item[1])
-                c.connectInParallel(l)
-            else:
-                pass
-                #raise SyntaxError("Alias {0} referrenced before assignment".format(item[0]))
-    if mutation == "add_series":
-        l1 = line()
-        for item in tree.children:
-            if item[0] in names and type(item[1]) is element:
-                l1.addElement(item[1])
-                l = l1
-            else:
-                pass
-        c.connectInSeries(l)
+        #print(proc_elements_names)
+        #print(proc_name)
+
+        if proc_name == "series":
+            l1 = line()
+            for element in proc_elements_names:
+                l1.addElement(names[element])
+            l = l1
+            c.connectInSeries(l)
+                    #raise SyntaxError("Alias {0} referrenced before assignment".format(item[0]))
+
+        elif proc_name == "parallel":
+            l1 = line()
+            for element in proc_elements_names:
+                l1.addElement(names[element])
+                c.connectInParallel(l1)
+                l1 = line()
+
+
+        elif proc_name == "add_parallel":
+            for item in tree.children:
+                if item[0] in names and type(item[1]) is element:
+                    l = line()
+                    l.addElement(item[1])
+                    c.connectInParallel(l)
+                else:
+                    pass
+                    #raise SyntaxError("Alias {0} referrenced before assignment".format(item[0]))
+        elif proc_name == "add_series":
+            l1 = line()
+            for item in tree.children:
+                if item[0] in names and type(item[1]) is element:
+                    l1.addElement(item[1])
+                    l = l1
+                else:
+                    pass
 
     c.evaluate("output.png")
-    print(c)
+    #print(c)
 new_tree = TreeTransformer().transform(parse_tree)
 
 print(new_tree.pretty())
