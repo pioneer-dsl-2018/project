@@ -37,6 +37,7 @@ So i can say,
 ```
 cell harry is 999 V
 ```
+
 or
 ```
 resistor tyler is 20 Omega
@@ -49,7 +50,9 @@ Good, so now we have two elements in our hand. Now we are going to manipulate th
 connect harry and tyler in series
 ```
 and that will produce this
+
 ![output1](/code/example/series/output.png)
+
 Or, we can connect them in parallel, simply say
 
 ```
@@ -57,6 +60,7 @@ connect harry and tyler in parallel
 ```
 
 and. . . that will produce this:
+
 ![output2](/code/example/parallel/output.png)
 
 ### Mutating
@@ -67,4 +71,5 @@ What if i want to add an element? Let say we have declared an element beforehand
 battery jeff is 10 V
 ```
 and that gives up the result
+
 ![output3](/code/example/add/output.png)
