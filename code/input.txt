@@ -1,12 +1,18 @@
+# declaring elements
 
 cell Harry is 999 V
 resistor tyler is 20 Omega
 battery jeff is 10 V
 line peter is 8 cm
 switch jack is 2 cm
+dot jerry
 
+# procedures
 connect Harry and tyler in parallel
-add jeff to tyler in series
+add jeff to tyler in parallel
+add tyler to jeff in series
+add Harry to tyler in series
+add jerry to tyler in series
 
 # comments
 # automatically print out the result
