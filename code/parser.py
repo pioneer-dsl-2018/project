@@ -23,17 +23,27 @@ def process_tree(tree):
         new_parse_tree
          /    |    \
         /     |     \
-      ele     ele   names
+      ele     ele   proc
 
     """
     c = circuit()
     l = line()
+    names = {}
+    procedure = []
+    for lst in tree.children:
+        if type(lst[0]) is str:
+            names[lst[0]] = lst[1]
+        else:
+            procedure.append(lst)
+    print(names)
+    print(procedure)
+
     ############################change this three lines!!
     names = tree.children[len(tree.children)-1][0]
     connection = tree.children[len(tree.children)-2][1]
     mutation = tree.children[len(tree.children)-1][1]
     ############################
-    print(mutation)
+
     if connection == "series":
         l1 = line()
         for item in tree.children:
@@ -83,10 +93,10 @@ def process_tree(tree):
         c.connectInSeries(l)
 
     c.evaluate("output.png")
-
+    print(c)
 new_tree = TreeTransformer().transform(parse_tree)
 
-#print(new_tree)
+print(new_tree.pretty())
 
 process_tree(new_tree)
 

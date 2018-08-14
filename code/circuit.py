@@ -68,12 +68,14 @@ class circuit:
         string = ''
         for l in self.connection:
             string += str(l)
+            string += "\n"
         return string
 
     def __repr__(self):
         string = ''
         for l in self.connection:
             string += str(l)
+            string += "\n"
         return string
 
 
