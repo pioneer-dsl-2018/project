@@ -7,7 +7,7 @@ battery jeff is 10 V
 
 # procedures
 connect Harry and tyler in parallel
-
+add jeff to tyler in parallel
 
 # comments
 # automatically print out the result
