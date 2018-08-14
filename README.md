@@ -51,7 +51,7 @@ connect harry and tyler in series
 ```
 and that will produce this
 
-![output1](/code/example/series/output.png)
+![output1](/example/series/output.png)
 
 Or, we can connect them in parallel, simply say
 
@@ -61,7 +61,7 @@ connect harry and tyler in parallel
 
 and. . . that will produce this:
 
-![output2](/code/example/parallel/output.png)
+![output2](/example/parallel/output.png)
 
 ### Mutating
 
@@ -72,4 +72,4 @@ battery jeff is 10 V
 ```
 and that gives up the result
 
-![output3](/code/example/add/output.png)
+![output3](/example/add/output.png)
