@@ -63,25 +63,23 @@ def process_tree(tree):
 
 
         elif proc_name == "add_parallel":
-            for item in tree.children:
-                if item[0] in names and type(item[1]) is element:
-                    l = line()
-                    l.addElement(item[1])
-                    c.connectInParallel(l)
-                else:
-                    pass
-                    #raise SyntaxError("Alias {0} referrenced before assignment".format(item[0]))
-        elif proc_name == "add_series":
+            new_element = proc_elements_names[1]
+            old_element = proc_elements_names[0]
             l1 = line()
-            for item in tree.children:
-                if item[0] in names and type(item[1]) is element:
-                    l1.addElement(item[1])
-                    l = l1
-                else:
-                    pass
+            l1.addElement(names[new_element])
+            c.connection.append(l1)
+
+
+        elif proc_name == "add_series":
+            new_element = proc_elements_names[1]
+            old_element = proc_elements_names[0]
+            for ln in c.connection:
+                for e in ln.elements:
+                    if names[old_element] == e:
+                        ln.elements.append(names[new_element])
 
     c.evaluate("output.png")
-    #print(c)
+    print(c)
 new_tree = TreeTransformer().transform(parse_tree)
 
 print(new_tree.pretty())

@@ -16,6 +16,7 @@ class element:
         self.label = label #label is what the user want to be appear on the circuit, it may contains values e.g. 13nC
         self.schemName = library[self.name]
         self.direction = 'right'
+        self.alias = ''
 
     def __str__(self):
         #str = "[name: "+ self.name + ", " + "label: " + self.label + ", " + "schemName: " + self.schemName +"]"
@@ -32,4 +33,3 @@ class element:
     #change the label of the element
     def changeLabel(self, newLabel):
         self.label = newLabel
-

@@ -3,8 +3,8 @@ cell Harry is 999 V
 resistor tyler is 20 Omega
 battery jeff is 10 V
 
-connect Harry and tyler in series
-#add jeff to tyler in parallel
+connect Harry and tyler in parallel
+add jeff to tyler in series
 
 # comments
 # automatically print out the result
