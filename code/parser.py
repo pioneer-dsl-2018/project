@@ -76,7 +76,8 @@ def process_tree(tree):
             for ln in c.connection:
                 for e in ln.elements:
                     if names[old_element] == e:
-                        ln.elements.append(names[new_element])
+                        ln.addElement(names[new_element])
+
 
     c.evaluate("output.png")
     print(c)

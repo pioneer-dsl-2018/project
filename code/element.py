@@ -10,7 +10,8 @@ class element:
         # This 'library' converts names to SchemeDraw library names
         # There should be more elements this Dictionary
         library = {'capacitor': 'e.CAP', 'resistor': 'e.RES', 'cell': 'e.BAT_CELL', 'battery': 'e.BATTERY',
-                   'dot': 'e.DOT','switch': 'e.SWITCH_SPST','line': 'e.LINE'}
+                   'dot': 'e.DOT','switch': 'e.SWITCH_SPST','line': 'e.LINE', 'voltmeter': 'METER_V', 'ammeter': 'METER_I',
+                   'ground':'GND'}
 
         self.name = name #name is the element itself. Instead of 'capacitor', it should be 'e.CAP'
         self.label = label #label is what the user want to be appear on the circuit, it may contains values e.g. 13nC

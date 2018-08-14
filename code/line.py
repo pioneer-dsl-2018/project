@@ -5,7 +5,7 @@ class line:
     #Constructors
     def __init__(self):
         self.elements = []# a list of elements
-        self.length = len(self.elements)
+        self.length = 0
 
     #mutators
     # this function adds an element to the end of a line

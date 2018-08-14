@@ -11,23 +11,18 @@ class circuit:
 
     #connect lines in parallel
     def connectInParallel(self, *lines):
-        max_length = 0
         for l in lines:
             self.connection.append(l)
 
-        def find_max_length(self):
-            nonlocal max_length
-            for l in self.connection:
-                if l.length > max_length:
-                    max_length = l.length
-                    self.max_length = max_length
+    def find_max_length(self):
+        for l in self.connection:
+            if l.length > self.max_length:
+                self.max_length = l.length
 
-            for l in self.connection:
-                if l.length < max_length:
-                    e = element('line')
-                    l.addElement(e)
-
-        return find_max_length(self)
+        for l in self.connection:
+            if l.length < self.max_length:
+                e = element('line')
+                l.addElement(e)
 
     #connect lines in series
     def connectInSeries(self, *lines):
@@ -36,6 +31,7 @@ class circuit:
 
     # 'ImageName' is the filename of the generated image'
     def evaluate(self, ImageName):
+        self.find_max_length()
         d = SchemDraw.Drawing()
         d.push()
         for i in range(0, self.connection[0].length):

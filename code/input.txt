@@ -2,6 +2,8 @@
 cell Harry is 999 V
 resistor tyler is 20 Omega
 battery jeff is 10 V
+line peter is 8 cm
+switch jack is 2 cm
 
 connect Harry and tyler in parallel
 add jeff to tyler in series
