@@ -2,6 +2,9 @@ package iCalendar;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.SocketException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -10,6 +13,7 @@ import java.util.Scanner;
 import java.util.TimeZone;
 import java.util.regex.MatchResult;
 
+import net.fortuna.ical4j.data.CalendarOutputter;
 import net.fortuna.ical4j.model.Date;
 import net.fortuna.ical4j.model.DateTime;
 import net.fortuna.ical4j.model.TimeZoneRegistry;
@@ -19,49 +23,101 @@ import net.fortuna.ical4j.model.component.VTimeZone;
 import net.fortuna.ical4j.model.property.CalScale;
 import net.fortuna.ical4j.model.property.ProdId;
 import net.fortuna.ical4j.model.property.RRule;
+import net.fortuna.ical4j.model.property.Version;
+import net.fortuna.ical4j.util.UidGenerator;
+import net.fortuna.ical4j.validate.ValidationException;
 
 public class Program {
 	
 	static net.fortuna.ical4j.model.Calendar cal = new net.fortuna.ical4j.model.Calendar();
 	static HashMap<String, CEvent> events = new HashMap<String, CEvent>();
 	static HashMap<String, CEvent> names = new HashMap<String, CEvent>();
+	static int UID = 1;
 	
-	public static void main(String[] args) throws ParseException {
+	public static void main(String[] args) throws ParseException, FileNotFoundException, SocketException {
 		
 		System.out.println("For convenience, please store all text files inside the res folder.");
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Please enter the file name: ");
 		String fileName = sc.nextLine();
-		sc.close();
+		
 		
 		cal.getProperties().add(new ProdId("-//Events Calendar//iCal4j 2.0//EN"));
+		cal.getProperties().add(Version.VERSION_2_0);
 		cal.getProperties().add(CalScale.GREGORIAN);
 		Scanner s;
-		
-			try {
-				s = new Scanner(new File("res/" + fileName + ".txt"));
-				while (s.hasNextLine()) {
-					String str = s.nextLine();
-					Scanner token = new Scanner(str);
-					String identifier = token.next();
-					if (identifier.equalsIgnoreCase("Repeat:")) {
-						parseRepeat(str);
-						enterRepeat();
-						
-					} else if (identifier.equalsIgnoreCase("ADE:")) {
-						parseADE(str.substring(5));
-					} else
-						parse(str);	
-					}
-			} catch (FileNotFoundException e) {
+		String boo = "n";
+		while(boo.equals("n")) {
+				try {
+					s = new Scanner(new File("res/" + fileName + ".txt"));
+					while (s.hasNextLine()) {
+						String str = s.nextLine();
+						Scanner token = new Scanner(str);
+						String identifier = token.next();
+						if (identifier.equalsIgnoreCase("Repeat:")) {
+							parseRepeat(str);
+							enterRepeat();
+							
+						} else if (identifier.equalsIgnoreCase("ADE:")) {
+							parseADE(str.substring(5));
+						} else
+							parse(str);	
+						}
+				} catch (FileNotFoundException e) {
+					
+					e.printStackTrace();
+				}
 				
-				e.printStackTrace();
+			System.out.println(cal.toString());
+			System.out.println("Is this file what you wanted?(y/n)");
+			boo = sc.nextLine();
+			if (boo.equals("n")) {
+				System.out.println("Do you wish to exit this program?(y/n)");
+				String boo2 = sc.nextLine();
+				if (boo2.equals("n")) {
+					System.out.println("Initializing...");
+					initialize();
+				} else {
+					System.out.println("Ending...");
+					System.exit(0);
+				}
+			} else {
+				saveFinal();
 			}
-			
-		System.out.println(cal.toString());
+			sc.close();
+		}
+		
+	
+		
 	}
 	
-	private static void parseADE(String str) {
+	private static void saveFinal() throws FileNotFoundException {
+		
+		FileOutputStream fout = new FileOutputStream("res/mycalendar.ics");
+
+		CalendarOutputter outputter = new CalendarOutputter();
+		try {
+			System.out.println("Generating ics file...");
+			outputter.output(cal, fout);
+		} catch (ValidationException e) {
+			
+			e.printStackTrace();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+
+	private static void initialize() {
+		
+		cal.getProperties().clear();
+		events.clear();
+		names.clear();
+		UID = 1;
+	}
+
+	private static void parseADE(String str) throws SocketException {
 	
 		int end = 0;
 		for (int i = 0; i < str.length(); i++) {
@@ -75,18 +131,26 @@ public class Program {
 		String date = str.substring(end + 5);
 		
 		CEvent e = new CEvent(date, description);
+		
+		UidGenerator ug = new UidGenerator("" + UID);
+	    e.getProperties().add(ug.generateUid());
+	    UID++;
+		
 		names.put(description, e);
 		cal.getComponents().add(e);
 	}
 
 	private static void enterRepeat() throws ParseException {
 		
-		
+		int x = events.size();
 		for (String key: events.keySet()) {
 			
+			x = x - 1;
 			String rule = key;
-			events.get(key).getProperties().add(new RRule(rule));
 			
+			if (x == 0) {
+				events.get(key).getProperties().add(new RRule(rule));
+			}
 		}
 		
 	}
@@ -129,6 +193,14 @@ public class Program {
 					int date = Integer.parseInt(code.substring(6, 8));
 					
 					events.put("FREQ=MONTHLY;BYMONTHDAY=" + date + ";INTERVAL=1", temp);
+					
+				} else if (type.equalsIgnoreCase("annually")) {
+					
+					String code = temp.getStartDate().getDate().toString();
+					int month = Integer.parseInt(code.substring(4, 6));
+					int date = Integer.parseInt(code.substring(6, 8));
+					System.out.println(code);
+					events.put("FREQ=YEARLY;BYMONTH=" + month + ";BYMONTHDAY=" + date, temp);
 					
 				} else if (type.equalsIgnoreCase("days")) {
 					
@@ -192,7 +264,7 @@ public class Program {
 		
 	}
 
-	private static void parse(String str) {
+	private static void parse(String str) throws SocketException {
 		String[] splited = str.split("\\s+");
 		int index = 0;
 		ArrayList <String> str2 = new ArrayList<String>(splited.length);
@@ -286,7 +358,7 @@ public class Program {
 		
 	}
 	
-	private static void parseEvent(String str) {
+	private static void parseEvent(String str) throws SocketException {
 		//String str = "Robotics meet: Sturts at 5:30 Ends at 8:00 Beginning date: 8/31/2018";
 		TimeZoneRegistry registry = TimeZoneRegistryFactory.getInstance().createRegistry();
 		TimeZone timezone = registry.getTimeZone("America/Mexico_City");
@@ -340,9 +412,12 @@ public class Program {
 	     DateTime startDT = new DateTime(start.getTime());
 	     DateTime endDT = new DateTime(end.getTime());
 	     CEvent e = new CEvent(startDT, endDT, description);
-	   
-	     names.put(description, e);
 	     
+	     UidGenerator ug = new UidGenerator("" + UID);
+	     e.getProperties().add(ug.generateUid());
+	     UID++;
+	   
+	     names.put(description, e); 
 	     cal.getComponents().add(e);
 	}
 
@@ -352,7 +427,7 @@ public class Program {
 	
 	
 	
-	private static void parseEvent1(String str) {
+	private static void parseEvent1(String str) throws SocketException {
 		
 		//str = "Robotics meet: Sturts at 5:30 Ends at 8:00 Beginning date: 8/31/2018";
 		TimeZoneRegistry registry = TimeZoneRegistryFactory.getInstance().createRegistry();
@@ -410,6 +485,10 @@ public class Program {
 	     DateTime endDT = new DateTime(end.getTime());
 	     CEvent e = new CEvent(startDT, endDT, description);
 	    
+	     UidGenerator ug = new UidGenerator("" + UID);
+	     e.getProperties().add(ug.generateUid());
+	     UID++;
+	     
 	     names.put(description, e);
 	     cal.getComponents().add(e);
 	    
