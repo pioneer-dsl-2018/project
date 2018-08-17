@@ -60,9 +60,13 @@ public class Program {
 							
 						} else if (identifier.equalsIgnoreCase("ADE:")) {
 							parseADE(str.substring(5));
-						} else
+						} else if (identifier.equalsIgnoreCase("Repeat")){
+							parseRepeatAll(str);
+							
+						} else {
 							parse(str);	
 						}
+					}
 				} catch (FileNotFoundException e) {
 					
 					e.printStackTrace();
@@ -91,6 +95,97 @@ public class Program {
 		
 	}
 	
+	private static void parseRepeatAll(String str) throws ParseException {
+		
+		for (String des : names.keySet()) {
+			
+	    	CEvent temp = names.get(des);
+	    
+			String type = str.substring(str.lastIndexOf(" ") + 1);
+			
+			if (type.equalsIgnoreCase("daily")) {
+				
+				events.put("FREQ=DAILY;INTERVAL=1", temp);
+				
+			} else if (type.equalsIgnoreCase("weekly")) {
+				
+				
+				events.put("FREQ=DAILY;INTERVAL=7", temp);
+				
+			} else if (type.equalsIgnoreCase("monthly")) {
+				
+				String code = temp.getStartDate().getDate().toString();
+				
+				int date = Integer.parseInt(code.substring(6, 8));
+				
+				events.put("FREQ=MONTHLY;BYMONTHDAY=" + date + ";INTERVAL=1", temp);
+				
+			} else if (type.equalsIgnoreCase("annually")) {
+				
+				String code = temp.getStartDate().getDate().toString();
+				int month = Integer.parseInt(code.substring(4, 6));
+				int date = Integer.parseInt(code.substring(6, 8));
+				System.out.println(code);
+				events.put("FREQ=YEARLY;BYMONTH=" + month + ";BYMONTHDAY=" + date, temp);
+				
+			} else if (type.equalsIgnoreCase("days")) {
+				
+				String[] words = str.split(" ");
+				String penultimate = words[words.length - 2];
+				  try
+			        {
+			            int interval = Integer.parseInt(penultimate);
+			            events.put("FREQ=DAILY;INTERVAL=" + interval, temp);
+			            
+			        } 
+			        catch (NumberFormatException e) 
+			        {
+			            System.out.println(penultimate + " is not a valid integer number");
+			        }
+				
+			} else if (type.equalsIgnoreCase("weeks")) {
+				
+				String[] words = str.split(" ");
+				String penultimate = words[words.length - 2];
+				  try
+			        {
+			            int interval = Integer.parseInt(penultimate);
+			            events.put("FREQ=DAILY;INTERVAL=" + interval * 7, temp);
+			            
+			        } 
+			        catch (NumberFormatException e) 
+			        {
+			            System.out.println(penultimate + " is not a valid integer number");
+			        }
+				
+			} else if (type.equalsIgnoreCase("months")) {
+				
+				String[] words = str.split(" ");
+				String penultimate = words[words.length - 2];
+				  try
+			        {
+					  String code = temp.getStartDate().getDate().toString();
+					  int date = Integer.parseInt(code.substring(6, 8));
+					  int interval = Integer.parseInt(penultimate);
+					  
+			          events.put("FREQ=MONTHLY;BYMONTHDAY=" + date + ";INTERVAL=" + interval, temp); 
+			            
+			        } 
+			        catch (NumberFormatException e) 
+			        {
+			            System.out.println(penultimate + " is not a valid integer number");
+			        }
+				
+			} else {
+			
+				System.out.println("{" + str + "}" + " is not a valid input.");
+			}
+			enterRepeat();
+		
+		}
+		
+	}
+
 	private static void saveFinal() throws FileNotFoundException {
 		
 		FileOutputStream fout = new FileOutputStream("res/mycalendar.ics");
@@ -99,6 +194,9 @@ public class Program {
 		try {
 			System.out.println("Generating ics file...");
 			outputter.output(cal, fout);
+			System.out.println("Done");
+			System.out.println("Have a great day!");
+			System.exit(0);
 		} catch (ValidationException e) {
 			
 			e.printStackTrace();
@@ -156,9 +254,7 @@ public class Program {
 	}
 
 	private static void parseRepeat(String str) {
-		// Repeat: (Description) daily/weekly/monthly
-		// weekly -> weekly [mon, tue, fri] or weekly [wed, sat, sun]
-		// monthly -> monthly on day _ 
+	
 		int start = 9;
 		int end = 0;
 		for (int i = 0; i < str.length(); i++) {
