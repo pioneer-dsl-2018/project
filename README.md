@@ -44,3 +44,6 @@ Repeat all: daily
 
 *To run the programs, first create a folder called res located at eclipse-workspace/iCalendar/res. Then place the text files containing one of these sample programs. After the program successfully execute, the .ics file created will also be located in the res folder. 
 
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/-7z8CCoBjOI/0.jpg)](https://www.youtube.com/watch?v=-7z8CCoBjOI)
+
