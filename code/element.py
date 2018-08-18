@@ -18,6 +18,22 @@ class element:
         self.schemName = library[self.name]
         self.direction = 'right'
         self.alias = ''
+        self.voltage = 0
+        self.resistance = 0
+        self.current = 0
+
+    def get_voltage(self):
+        return self.current * self.resistance
+
+    def get_current(self):
+        if self.resistance == 0:
+            return "the resistance is 0, unable to divide"
+        return self.voltage / self.resistance
+
+    def get_resistance(self):
+        if self.current == 0:
+            return "the current is 0, unable to divide"
+        return self.voltage / self.current
 
     def __str__(self):
         #str = "[name: "+ self.name + ", " + "label: " + self.label + ", " + "schemName: " + self.schemName +"]"

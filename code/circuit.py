@@ -8,6 +8,7 @@ class circuit:
     def __init__(self):
         self.connection = []
         self.max_length = 0
+        
 
     #connect lines in parallel
     def connectInParallel(self, *lines):
@@ -74,4 +75,8 @@ class circuit:
             string += "\n"
         return string
 
-
+############################
+    def print_data(self):
+        for l in self.connection:
+            str = ''
+###########################
