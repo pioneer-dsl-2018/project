@@ -78,5 +78,8 @@ class circuit:
 ############################
     def print_data(self):
         for l in self.connection:
-            str = ''
+            for e in l.elements:
+                message = 'type: {0}\n ' + 'alias: {1}\n' + 'voltage: {2} \n' +'current: {3}\n\n'.format(e.name, e.alias, e.get_voltage(), e.get_current())
+                print(message)
+
 ###########################

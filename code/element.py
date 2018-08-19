@@ -27,12 +27,14 @@ class element:
 
     def get_current(self):
         if self.resistance == 0:
-            return "the resistance is 0, unable to divide"
+            print( "the resistance is 0, unable to divide")
+            return 0
         return self.voltage / self.resistance
 
     def get_resistance(self):
         if self.current == 0:
-            return "the current is 0, unable to divide"
+            print( "the current is 0, unable to divide")
+            return 0
         return self.voltage / self.current
 
     def __str__(self):
