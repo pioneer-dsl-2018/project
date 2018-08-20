@@ -60,23 +60,23 @@ object Parser extends JavaTokenParsers with PackratParsers{
     mark | move | set
 
   lazy val mark: PackratParser[Action] =
-    "mark" ~ "point" ~ point_position ~ "as" ~ NAME ^^ {case "mark" ~ "point" ~ a ~ "as" ~ b => MarkThePoint(a, b)} |
-      "mark" ~ "line" ~ line ~ "as" ~ NAME ^^ {case "mark" ~ "line" ~ a ~ "as" ~ b => MarkThePoint(a, b)}
+    "mark" ~ "point" ~ point_position ~ "as" ~ String ^^ {case "mark" ~ "point" ~ a ~ "as" ~ b => MarkThePoint(a, b)} |
+      "mark" ~ "line" ~ line_position ~ "as" ~ String ^^ {case "mark" ~ "line" ~ a ~ "as" ~ b => MarkTheLine(a, b)}
 
   lazy val move: PackratParser[Action] =
-    "move" ~ "point" ~ point_position ~ command ~ number ^^ {case "move" ~ "point" ~ a ~ b ~ c => MoveThePoint(a, b)} |
-      "move" ~ "line" ~ line ~ command ~ number ^^ {case "move" ~ "line" ~ a ~ b ~ c => MoveTheLine(a, b)}
+    "move" ~ "point" ~ point_position ~ command ~ decimalNumber ^^ {case "move" ~ "point" ~ a ~ b ~ c => MoveThePoint(a, b, c.toDouble)} |
+      "move" ~ "line" ~ line_position ~ command ~ decimalNumber ^^ {case "move" ~ "line" ~ a ~ b ~ c => MoveTheLine(a, b, c.toDouble)}
 
   lazy val set: PackratParser[Action] =
-    "set" ~ "point" ~ point_position ~ character ~ "to" ~  ^^ {case "set" ~ "point" ~ a ~ b ~ "to" ~ => SetThePoint(a, b)} |
-      "set" ~ "line" ~ line ~ character ~ "to" ~ ^^ {case "set" ~ "line" ~ a ~ b ~ "to" ~ => SetTheLine(a, b)}
+    "set" ~ "point" ~ point_position ~ character ~ "to" ~ String ^^ {case "set" ~ "point" ~ a ~ b ~ "to" ~ c => SetThePoint(a, b, c)} |
+      "set" ~ "line" ~ line_position ~ character ~ "to" ~ String ^^ {case "set" ~ "line" ~ a ~ b ~ "to" ~ c => SetTheLine(a, b, c)}
 
 
   lazy val direction: Parser[String] = "clockwise" | "counter-clockwise"
-  lazy val point_position: PackratParser[Point] = "(" ~ decimalNumber ~ "," ~ decimalNumber ~ ")" ^^ {case "(" ~ x ~ "," ~ y ~")" ⇒ Point(x.toDouble, y.toDouble)}
-  val number: Parser[Double]
-  val NAME: PackratParser[String]
+  lazy val point_position: PackratParser[Point] = "(" ~ decimalNumber ~ "," ~ decimalNumber ~ ")" ^^ {case "(" ~ x ~ "," ~ y ~ ")" ⇒ Point(x.toDouble, y.toDouble)}
+  lazy val line_position: PackratParser[Line] = "(" ~ point_position ~ "," ~ point_position ~ ")" ^^ {case "(" ~ x ~ "," ~ y ~ ")" ⇒ Line(x, y)}
   lazy val character: Parser[String] = "color" | "thickness"
   lazy val command: Parser[String] = "up" | "down" | "left" | "right"
+
 
 }
