@@ -52,3 +52,38 @@ class element:
     #change the label of the element
     def changeLabel(self, newLabel):
         self.label = newLabel
+    
+
+class CompleteElement(element):
+
+    d = SchemDraw.Drawing()
+
+    # Constructors
+    def __init__(self, name='', label=''):
+        d = SchemDraw.Drawing()
+
+        library = {'capacitor': 'e.CAP', 'resistor': 'e.RES', 'cell': 'e.BAT_CELL', 'battery': 'e.BATTERY',
+                   'dot': 'e.DOT','switch': 'e.SWITCH_SPST','line': 'e.LINE', 'voltmeter': 'METER_V', 'ammeter': 'METER_I',
+                   'ground':'GND'}
+
+        self.name = name 
+        self.label = label 
+        self.schemName = library[self.name]
+        self.direction = 'right'
+        self.alias = ''
+
+        self.xy = ''
+        self.end_points = ''
+        self.to = ''
+        self.tox = ''
+        self.toy = ''
+        self.l = 0
+        self.zoom = 1
+        self.anchor = ''
+        self.d = ''
+        self.theta = 0
+
+    def set_attr(self, *args):
+        for arg in args:
+            print(arg)
+
