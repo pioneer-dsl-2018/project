@@ -16,7 +16,7 @@ class TreeTransformer(Transformer):
             elif item.data == "alias":
                 alias = item.children[0].value
             elif item.data == "label":
-                label = item.children[0] + '$' + '\\' + item.children[1] + '$'
+                label = item.children[0] + '$' + item.children[1] + '$'
         return [alias, element(name, label)]
 
     def connection(self, items):
@@ -42,3 +42,9 @@ class TreeTransformer(Transformer):
                 return [names, 'add_series']
             elif items[3] == 'parallel':
                 return [names, 'add_parallel']
+    def set_mode(self, items):
+        mode_name = items[0]
+        if mode_name == "calculator":
+            return [["calculator"], "set_mode"]
+        elif mode_name == "hand-mode":
+            return [["hand-mode"], "set_mode"]

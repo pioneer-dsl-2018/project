@@ -1,8 +1,9 @@
-    expression: (set_label | connection | mutation)+
+    expression: (set_label | connection | mutation | set_mode)+
 
     set_label: components alias "is" label | components alias
     connection: "connect" components "in" CONNECTION_TYPE
     mutation: MUTATE components "to" components "in" CONNECTION_TYPE
+    set_mode: "enable" MODE
 
     components: alias | alias "and" alias
     label: NUMBER UNIT | NUMBER
@@ -15,6 +16,7 @@
     UNIT: /[a-zA-Z_]\w*/
     NUMBER: /0|[1-9]\d*/
     COMMENT: /#[^\n]*/
+    MODE: "calculator" | "hand-mode"
 
     %import common.WS
     %ignore COMMENT

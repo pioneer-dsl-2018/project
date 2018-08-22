@@ -43,8 +43,12 @@ def process_tree(tree):
         proc_elements_names = proc[0]
         proc_name = proc[1]
 
-        #print(proc_elements_names)
-        #print(proc_name)
+        print(proc_elements_names)
+        print(proc_name)
+
+        if proc_name == "set_mode":
+            mode_name = proc_elements_names[0] # only one mode at a time
+            c.set_mode(mode_name)
 
         if proc_name == "series":
             l1 = line()
