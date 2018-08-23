@@ -6,6 +6,9 @@ class line:
     def __init__(self):
         self.elements = []# a list of elements
         self.length = 0
+        self.total_voltage = 0
+        self.total_resistance = 0
+        self.total_current = 0
 
     #mutators
     # this function adds an element to the end of a line
@@ -25,13 +28,12 @@ class line:
     def __repr__(self) -> str:
         return "these are element in this line: {0}".format(self.elements)
 
-    def __contains__(self, element):
+    #calculate voltage, current, resistance in a line
+    def calculate_line(self):
         for e in self.elements:
-            if isinstance(e, element):
-                return True
-        return False
-
-
+            self.total_voltage += e.voltage
+            self.total_resistance += e.resistance
+        self.total_current = self.elements[0].current
 
 
 

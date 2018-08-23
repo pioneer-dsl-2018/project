@@ -1,18 +1,8 @@
-# declaring elements
+# setting modes
 
-cell Harry is 999 V
-resistor tyler is 20 Omega
-battery jeff is 10 V
-line peter is 8 cm
-switch jack is 2 cm
-dot jerry
+enable draw-mode
 
-# procedures
-connect Harry and tyler in parallel
-add jeff to tyler in parallel
-add tyler to jeff in series
-add Harry to tyler in series
-add jerry to tyler in series
+add capacitor with d = right xy = 1 theta = 20
 
 # comments
 # automatically print out the result

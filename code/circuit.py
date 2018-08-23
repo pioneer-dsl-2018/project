@@ -8,6 +8,8 @@ class circuit:
     def __init__(self):
         self.connection = []
         self.max_length = 0
+        self.modes = []
+        
 
     #connect lines in parallel
     def connectInParallel(self, *lines):
@@ -31,6 +33,14 @@ class circuit:
 
     # 'ImageName' is the filename of the generated image'
     def evaluate(self, ImageName):
+
+        if "hand-mode" in self.modes:
+            import matplotlib.pyplot as plt
+            plt.xkcd()
+
+        if "calculator" in self.modes:
+            self.print_data()
+
         self.find_max_length()
         d = SchemDraw.Drawing()
         d.push()
@@ -54,8 +64,6 @@ class circuit:
                     exec(str(self.connection[i].elements[j]))
                 d.add(e.LINE, d='up')
                 d.pop()
-
-
         #print(self.connection)
         d.draw()
         d.save(ImageName)
@@ -73,5 +81,16 @@ class circuit:
             string += str(l)
             string += "\n"
         return string
+    
+    def set_mode(self, mode_name):
+        self.modes.append(mode_name)
 
 
+############################
+    def print_data(self):
+        for l in self.connection:
+            for e in l.elements:
+                message = 'type: {0}\n ' + 'alias: {1}\n' + 'voltage: {2} \n' +'current: {3}\n\n'.format(e.name, e.alias, e.get_voltage(), e.get_current())
+                print(message)
+
+###########################
