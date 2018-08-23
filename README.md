@@ -1,5 +1,5 @@
 # Circuit-Drawing DSL
-*README UPDATED on August 14*
+*README UPDATED on August 23*
 
 ## How to use
 
@@ -8,6 +8,7 @@ Welcome to this citcuit drawing DSL! To run this program, first install some pac
 ```
 $ pip3 install lark-parser
 $ pip3 install SchemDraw
+$ pip3 install matplotlib
 ```
 
 After the packages are installed, download these files and put them in a place to run. In the ```code``` directory, type this:
@@ -49,7 +50,7 @@ Good, so now we have two elements in our hand. Now we are going to manipulate th
 ```
 connect harry and tyler in series
 ```
-and that will produce this
+and that will produce an image like this
 
 ![output1](/example/series/output.png)
 
@@ -65,11 +66,15 @@ and. . . that will produce this:
 
 ### Mutating
 
-What if i want to add an element? Let say we have declared an element beforehand
+We can add a element to another element in series or in parallel, for example, if we have another element declared:
 
 ```
+# declaration
 battery jeff is 10 V
+
+# mutation
+add jeff to tyler in parallel
 ```
-and that gives up the result
+and that yields the result
 
 ![output3](/example/add/output.png)
