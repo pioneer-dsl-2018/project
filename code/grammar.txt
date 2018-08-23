@@ -16,7 +16,7 @@
     UNIT: /[a-zA-Z_]\w*/
     NUMBER: /0|[1-9]\d*/
     COMMENT: /#[^\n]*/
-    MODE: "calculator" | "hand-mode" | "logic"
+    MODE: "calculator" | "hand-mode" | "draw-mode"
 
     %import common.WS
     %ignore COMMENT

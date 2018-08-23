@@ -69,21 +69,37 @@ class CompleteElement(element):
         self.name = name 
         self.label = label 
         self.schemName = library[self.name]
-        self.direction = 'right'
         self.alias = ''
 
-        self.xy = ''
-        self.end_points = ''
-        self.to = ''
-        self.tox = ''
-        self.toy = ''
-        self.l = 0
-        self.zoom = 1
-        self.anchor = ''
-        self.d = ''
-        self.theta = 0
+        self.other_attrs_nums = {}
+        self.other_attrs_strings = {}
+        self.attrs_strings = ''
 
-    def set_attr(self, *args):
-        for arg in args:
-            print(arg)
+    def set_other_attrs(self, attr_dict):
+        num_attrs = ['xy', 'endpts', 'to', 'tox', 'toy', 'l', 'zoom', 'theta']
+        str_attrs = ['anchor', 'd']
+        for attr in attr_dict:
+            if attr in num_attrs:
+                self.other_attrs_nums[attr] = attr_dict[attr]
+            elif attr in str_attrs:
+                self.other_attrs_strings[attr] = attr_dict[attr]
+            else:
+                pass #belongs to neither of the group
+    
+    def process_other_attrs(self):
+        for attr in self.other_attrs_nums:
+            self.attrs_strings += ', {0} = {1}'.format(attr, self.other_attrs_nums[attr])
+        for attr in self.other_attrs_strings:
+            self.attrs_strings += ', {0} = \'{1}\''.format(attr, self.other_attrs_strings[attr])
+    
+    def __str__(self):
+        str = 'd.add(' + self.schemName + ',' + 'label = ' + '\'' + self.label + '\'' + self.attrs_strings + ')'
+        return str
+
+    def __repr__(self):
+        str = 'd.add(' + self.schemName + ',' + 'label = ' + '\'' + self.label + '\'' + self.attrs_strings + ')'
+        return str
+
+        
+        
 
