@@ -53,7 +53,7 @@ class element:
     def changeLabel(self, newLabel):
         self.label = newLabel
     
-
+#overrides the above 'element' class
 class CompleteElement(element):
 
     d = SchemDraw.Drawing()

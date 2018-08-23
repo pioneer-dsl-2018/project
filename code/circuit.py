@@ -85,6 +85,7 @@ class circuit:
     def set_mode(self, mode_name):
         self.modes.append(mode_name)
 
+
 ############################
     def print_data(self):
         for l in self.connection:

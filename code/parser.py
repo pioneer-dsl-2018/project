@@ -44,7 +44,7 @@ def process_tree(tree):
         proc_name = proc[1]
 
         print(proc_elements_names)
-        print(proc_name)
+        #print(proc_name)
 
         if proc_name == "set_mode":
             mode_name = proc_elements_names[0] # only one mode at a time
@@ -84,10 +84,10 @@ def process_tree(tree):
 
 
     c.evaluate("output.png")
-    print(c)
+    #print(c)
 new_tree = TreeTransformer().transform(parse_tree)
 
-print(new_tree.pretty())
+#print(new_tree.pretty())
 
 process_tree(new_tree)
 

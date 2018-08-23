@@ -49,5 +49,15 @@ class TreeTransformer(Transformer):
             return [["calculator"], "set_mode"]
         elif mode_name == "hand-mode":
             return [["hand-mode"], "set_mode"]
-        elif mode_name == "logic":
-            return [["logic"], "set_mode"]
+        elif mode_name == "draw-mode":
+            return [["draw-mode"], "set_mode"]
+
+    def draw_element(self, items):
+        name = str(items[0].children[0].children[0])
+        lst = []
+        result = {}
+        for e in items[1].children:
+            lst.append(str(e))
+        for i in range(0, len(lst), 2):
+            result[lst[i]] = lst[i+1]
+        return [name, result]
