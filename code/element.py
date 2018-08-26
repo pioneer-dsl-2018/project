@@ -59,7 +59,7 @@ class CompleteElement(element):
     d = SchemDraw.Drawing()
 
     # Constructors
-    def __init__(self, name='', label=''):
+    def __init__(self, name=''):
         d = SchemDraw.Drawing()
 
         library = {'capacitor': 'e.CAP', 'resistor': 'e.RES', 'cell': 'e.BAT_CELL', 'battery': 'e.BATTERY',
@@ -67,16 +67,16 @@ class CompleteElement(element):
                    'ground':'GND'}
 
         self.name = name 
-        self.label = label 
         self.schemName = library[self.name]
         self.alias = ''
+        self.label = ''
 
         self.other_attrs_nums = {}
         self.other_attrs_strings = {}
         self.attrs_strings = ''
 
     def set_other_attrs(self, attr_dict):
-        num_attrs = ['xy', 'endpts', 'to', 'tox', 'toy', 'l', 'zoom', 'theta']
+        num_attrs = ['xy', 'endpts', 'to', 'tox', 'toy', 'l', 'zoom', 'theta', 'label']
         str_attrs = ['anchor', 'd']
         for attr in attr_dict:
             if attr in num_attrs:
@@ -93,11 +93,11 @@ class CompleteElement(element):
             self.attrs_strings += ', {0} = \'{1}\''.format(attr, self.other_attrs_strings[attr])
     
     def __str__(self):
-        str = 'd.add(' + self.schemName + ',' + 'label = ' + '\'' + self.label + '\'' + self.attrs_strings + ')'
+        str = 'd.add(' + self.schemName + self.attrs_strings + ')'
         return str
 
     def __repr__(self):
-        str = 'd.add(' + self.schemName + ',' + 'label = ' + '\'' + self.label + '\'' + self.attrs_strings + ')'
+        str = 'd.add(' + self.schemName +  self.attrs_strings + ')'
         return str
 
         

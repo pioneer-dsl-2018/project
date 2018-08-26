@@ -34,6 +34,15 @@ class circuit:
     # 'ImageName' is the filename of the generated image'
     def evaluate(self, ImageName):
 
+        if "draw-mode" in self.modes:
+            d = SchemDraw.Drawing()
+            for i in range(0, self.connection[0].length):
+                print(str(self.connection[0].elements[i]))
+                exec(str(self.connection[0].elements[i]))
+            d.draw()
+            d.save(ImageName)
+            exit()
+
         if "hand-mode" in self.modes:
             import matplotlib.pyplot as plt
             plt.xkcd()
@@ -90,7 +99,7 @@ class circuit:
     def print_data(self):
         for l in self.connection:
             for e in l.elements:
-                message = 'type: {0}\n ' + 'alias: {1}\n' + 'voltage: {2} \n' +'current: {3}\n\n'.format(e.name, e.alias, e.get_voltage(), e.get_current())
+                message = 'type: {0}\nalias: {1}\nvoltage: {2} \ncurrent: {3}\n\n'.format(e.name, e.alias, e.get_voltage(), e.get_current())
                 print(message)
 
 ###########################

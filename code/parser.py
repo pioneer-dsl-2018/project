@@ -35,7 +35,7 @@ def process_tree(tree):
             names[lst[0]] = lst[1]
         else:
             procedures.append(lst)
-    #print(names)
+    print(names)
     #print(procedures)
 
     for proc in procedures:
@@ -44,12 +44,24 @@ def process_tree(tree):
         proc_name = proc[1]
 
         print(proc_elements_names)
-        #print(proc_name)
+        print(proc_name)
 
         if proc_name == "set_mode":
-            mode_name = proc_elements_names[0] # only one mode at a time
-            c.set_mode(mode_name)
-
+            mode_name = proc_elements_names[0]
+            if mode_name != "draw-mode": 
+                c.set_mode(mode_name)
+            elif mode_name == "draw-mode":
+                l1 = line()
+                # draw mode is different from other modes
+                for element in names:
+                    e = CompleteElement(element)
+                    e.set_other_attrs(names[element])
+                    e.process_other_attrs()
+                    l1.addElement(e)
+                c.connectInSeries(l1)
+                c.set_mode("draw-mode")
+                    
+                    
         if proc_name == "series":
             l1 = line()
             for element in proc_elements_names:
