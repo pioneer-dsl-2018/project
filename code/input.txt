@@ -2,7 +2,10 @@
 
 enable draw-mode
 
-add capacitor with d = right xy = 1 theta = 20
+add battery with theta = 30
+add capacitor with theta = 90
+add resistor with theta = 20
+add cell with d = up
 
 # comments
 # automatically print out the result

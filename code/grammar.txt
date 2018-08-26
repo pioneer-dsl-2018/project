@@ -4,7 +4,7 @@
     connection: "connect" components "in" CONNECTION_TYPE
     mutation: MUTATE components "to" components "in" CONNECTION_TYPE
     set_mode: "enable" MODE
-    draw_element: "add" components "with" attributes
+    draw_element: "add" components "with" attributes | "add" components 
     
 
     components: alias | alias "and" alias

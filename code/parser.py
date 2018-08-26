@@ -31,6 +31,7 @@ def process_tree(tree):
     names = {}
     procedures = []
     for lst in tree.children:
+        print(lst)
         if type(lst[0]) is str:
             names[lst[0]] = lst[1]
         else:
@@ -43,8 +44,8 @@ def process_tree(tree):
         proc_elements_names = proc[0]
         proc_name = proc[1]
 
-        print(proc_elements_names)
-        print(proc_name)
+        #print(proc_elements_names)
+        #print(proc_name)
 
         if proc_name == "set_mode":
             mode_name = proc_elements_names[0]
