@@ -4,25 +4,24 @@ import java.awt.Color
 
 
 package object back {
-  def DrawWithRuler_do(a: Point, b: Point): Unit = {
-    StdDraw.setPenRadius(0.005)
-    StdDraw.setPenColor(StdDraw.BLACK)
-    StdDraw.line(a.x_coordinate, a.y_coordinate, b.x_coordinate, b.y_coordinate)
+  def DrawWithRuler_do(a: Point, b: Point): String = {
+    """#StdDraw.setPenRadius(a.thickness)
+    #StdDraw.setPenColor(color_interpreter(a.color))
+    #StdDraw.line(a.x_coordinate, a.y_coordinate, b.x_coordinate, b.y_coordinate)
+    #""".stripMargin('#')
   }
 
-  def DrawWithCompass_do(center: Point, radius: Double, rotate: Rotation): Unit = {
-    StdDraw.setPenRadius(0.005)
-    StdDraw.setPenColor(StdDraw.GRAY)
-    StdDraw.arc(center.x_coordinate, center.y_coordinate, radius, rotate.start_degree, rotate.end_degree)
+  def DrawWithCompass_do(center: Point, radius: Double, rotate: Rotation): String = {
+    "StdDraw.setPenRadius(center.thickness)"
+    "StdDraw.setPenColor(color_interpreter(center.color))"
+    if(rotate.direction == Direction("counter-clockwise")){
+      "StdDraw.arc(center.x_coordinate, center.y_coordinate, radius, rotate.start_degree, rotate.start_degree-(rotate.start_degree-rotate.end_degree))"
+    }
+    else{
+      "StdDraw.arc(center.x_coordinate, center.y_coordinate, radius, rotate.start_degree, rotate.end_degree)"
+    }
   }
 
-  def MarkThePoint_do(point_a: Point, name: String): Unit = {
-
-  }
-
-  def MarkTheLine_do(line_a: Line, name: String): Unit = {
-
-  }
 
   def color_interpreter(value: String): Color = {
     if (value == "blue"){
@@ -47,7 +46,7 @@ package object back {
 
   def SetThePoint_do(point_a: Point, character: String, value: String): Unit = {
     if (character == "color"){
-      StdDraw.setPenColor(color_interpreter((value)))
+      StdDraw.setPenColor(color_interpreter(value))
       StdDraw.point(point_a.x_coordinate, point_a.y_coordinate)
     }
     else if (character == "thickness"){
@@ -59,14 +58,16 @@ package object back {
     }
   }
 
-  def SetTheLine_do(line_a: Line, character: String, value: String): Unit = {
+  def SetTheLine_do(input_line: Line, character: String, value: String): Unit = {
     if (character == "color"){
-      StdDraw.setPenColor(color_interpreter((value)))
-      StdDraw.line(line_a.start_point.x_coordinate, line_a.start_point.y_coordinate, line_a.end_point.x_coordinate, line_a.end_point.y_coordinate)
+      val input_line.color = value
+      StdDraw.setPenColor(color_interpreter(input_line.color))
+      StdDraw.line(input_line.start_point.x_coordinate, input_line.start_point.y_coordinate, input_line.end_point.x_coordinate, input_line.end_point.y_coordinate)
     }
     else if (character == "thickness"){
-      StdDraw.setPenRadius(value.toDouble)
-      StdDraw.line(line_a.start_point.x_coordinate, line_a.start_point.y_coordinate, line_a.end_point.x_coordinate, line_a.end_point.y_coordinate)
+      val input_line.thickness = value.toDouble
+      StdDraw.setPenRadius(input_line.thickness)
+      StdDraw.line(input_line.start_point.x_coordinate, input_line.start_point.y_coordinate, input_line.end_point.x_coordinate, input_line.end_point.y_coordinate)
     }
     else{
       println("Wrong character input. The possible two input choices are: color, thickness. More features are under construction.")
@@ -76,38 +77,38 @@ package object back {
   def MoveThePoint_do(point_a: Point, command: String, value: Double): Unit = {
     if (command == "up"){
       // remove the original point
-      StdDraw.setPenRadius(0.005)
+      StdDraw.setPenRadius(point_a.thickness)
       StdDraw.setPenColor(StdDraw.WHITE)
       StdDraw.point(point_a.x_coordinate, point_a.y_coordinate)
       // draw the new point
-      StdDraw.setPenColor(StdDraw.BLACK)
+      StdDraw.setPenColor(color_interpreter(point_a.color))
       StdDraw.point(point_a.x_coordinate, point_a.y_coordinate + value)
     }
-    if (command == "down"){
+    else if (command == "down"){
       // remove the original point
-      StdDraw.setPenRadius(0.005)
+      StdDraw.setPenRadius(point_a.thickness)
       StdDraw.setPenColor(StdDraw.WHITE)
       StdDraw.point(point_a.x_coordinate, point_a.y_coordinate)
       // draw the new point
-      StdDraw.setPenColor(StdDraw.BLACK)
+      StdDraw.setPenColor(color_interpreter(point_a.color))
       StdDraw.point(point_a.x_coordinate, point_a.y_coordinate - value)
     }
-    if (command == "left"){
+    else if (command == "left"){
       // remove the original point
-      StdDraw.setPenRadius(0.005)
+      StdDraw.setPenRadius(point_a.thickness)
       StdDraw.setPenColor(StdDraw.WHITE)
       StdDraw.point(point_a.x_coordinate, point_a.y_coordinate)
       // draw the new point
-      StdDraw.setPenColor(StdDraw.BLACK)
+      StdDraw.setPenColor(color_interpreter(point_a.color))
       StdDraw.point(point_a.x_coordinate - value, point_a.y_coordinate)
     }
-    if (command == "right"){
+    else if (command == "right"){
       // remove the original point
-      StdDraw.setPenRadius(0.005)
+      StdDraw.setPenRadius(point_a.thickness)
       StdDraw.setPenColor(StdDraw.WHITE)
       StdDraw.point(point_a.x_coordinate, point_a.y_coordinate)
       // draw the new point
-      StdDraw.setPenColor(StdDraw.BLACK)
+      StdDraw.setPenColor(color_interpreter(point_a.color))
       StdDraw.point(point_a.x_coordinate + value, point_a.y_coordinate)
     }
     else{
@@ -115,60 +116,59 @@ package object back {
     }
   }
 
-  def MoveTheLine_do(line_a: Line, command: String, value: Double): Unit = {
+  def MoveTheLine_do(input_line: Line, command: String, value: Double): Unit = {
     if (command == "up"){
       // remove the original line
-      StdDraw.setPenRadius(0.005)
+      StdDraw.setPenRadius(input_line.thickness)
       StdDraw.setPenColor(StdDraw.WHITE)
-      StdDraw.line(line_a.start_point.x_coordinate, line_a.start_point.y_coordinate, line_a.end_point.x_coordinate, line_a.end_point.y_coordinate)
+      StdDraw.line(input_line.start_point.x_coordinate, input_line.start_point.y_coordinate, input_line.end_point.x_coordinate, input_line.end_point.y_coordinate)
       // draw the new line
-      StdDraw.setPenColor(StdDraw.BLACK)
-      StdDraw.line(line_a.start_point.x_coordinate, line_a.start_point.y_coordinate + value, line_a.end_point.x_coordinate, line_a.end_point.y_coordinate + value)
+      StdDraw.setPenColor(color_interpreter(input_line.color))
+      StdDraw.line(input_line.start_point.x_coordinate, input_line.start_point.y_coordinate + value, input_line.end_point.x_coordinate, input_line.end_point.y_coordinate + value)
     }
-    if (command == "down"){
+    else if (command == "down"){
       // remove the original line
-      StdDraw.setPenRadius(0.005)
+      StdDraw.setPenRadius(input_line.thickness)
       StdDraw.setPenColor(StdDraw.WHITE)
-      StdDraw.line(line_a.start_point.x_coordinate, line_a.start_point.y_coordinate, line_a.end_point.x_coordinate, line_a.end_point.y_coordinate)
+      StdDraw.line(input_line.start_point.x_coordinate, input_line.start_point.y_coordinate, input_line.end_point.x_coordinate, input_line.end_point.y_coordinate)
       // draw the new line
-      StdDraw.setPenColor(StdDraw.BLACK)
-      StdDraw.line(line_a.start_point.x_coordinate, line_a.start_point.y_coordinate - value, line_a.end_point.x_coordinate, line_a.end_point.y_coordinate - value)
+      StdDraw.setPenColor(color_interpreter(input_line.color))
+      StdDraw.line(input_line.start_point.x_coordinate, input_line.start_point.y_coordinate - value, input_line.end_point.x_coordinate, input_line.end_point.y_coordinate - value)
     }
-    if (command == "left"){
+    else if (command == "left"){
       // remove the original line
-      StdDraw.setPenRadius(0.005)
+      StdDraw.setPenRadius(input_line.thickness)
       StdDraw.setPenColor(StdDraw.WHITE)
-      StdDraw.line(line_a.start_point.x_coordinate, line_a.start_point.y_coordinate, line_a.end_point.x_coordinate, line_a.end_point.y_coordinate)
+      StdDraw.line(input_line.start_point.x_coordinate, input_line.start_point.y_coordinate, input_line.end_point.x_coordinate, input_line.end_point.y_coordinate)
       // draw the new line
-      StdDraw.setPenColor(StdDraw.BLACK)
-      StdDraw.line(line_a.start_point.x_coordinate - value, line_a.start_point.y_coordinate, line_a.end_point.x_coordinate - value, line_a.end_point.y_coordinate)
+      StdDraw.setPenColor(color_interpreter(input_line.color))
+      StdDraw.line(input_line.start_point.x_coordinate - value, input_line.start_point.y_coordinate, input_line.end_point.x_coordinate - value, input_line.end_point.y_coordinate)
     }
-    if (command == "right"){
+    else if (command == "right"){
       // remove the original line
-      StdDraw.setPenRadius(0.005)
+      StdDraw.setPenRadius(input_line.thickness)
       StdDraw.setPenColor(StdDraw.WHITE)
-      StdDraw.line(line_a.start_point.x_coordinate, line_a.start_point.y_coordinate, line_a.end_point.x_coordinate, line_a.end_point.y_coordinate)
+      StdDraw.line(input_line.start_point.x_coordinate, input_line.start_point.y_coordinate, input_line.end_point.x_coordinate, input_line.end_point.y_coordinate)
       // draw the new line
-      StdDraw.setPenColor(StdDraw.BLACK)
-      StdDraw.line(line_a.start_point.x_coordinate + value, line_a.start_point.y_coordinate, line_a.end_point.x_coordinate + value, line_a.end_point.y_coordinate)
+      StdDraw.setPenColor(color_interpreter(input_line.color))
+      StdDraw.line(input_line.start_point.x_coordinate + value, input_line.start_point.y_coordinate, input_line.end_point.x_coordinate + value, input_line.end_point.y_coordinate)
+    }
+    else{
+      println("Wrong command input. The possible input choices are: up, down, left, right.")
     }
   }
 
 
   def evaluate(action: Action): Unit = action match {
-    case Num(i) => i.toDouble
 
-    case DrawWithRuler(point_a, point_b) ⇒ DrawWithRuler_do(point_a,point_b)
+    case DrawWithRuler(point_a, point_b) ⇒ print(DrawWithRuler_do(point_a,point_b))
     case DrawWithCompass(center, radius, rotation_property) ⇒ DrawWithCompass_do(center, radius, rotation_property)
 
-    case MarkThePoint(point_a, name) ⇒ MarkThePoint_do(point_a, name)
-    case MarkTheLine(line_a, name) ⇒ MarkTheLine_do(line_a, name)
-
     case SetThePoint(point_a, character, value) ⇒ SetThePoint_do(point_a, character, value)
-    case SetTheLine(line_a, character, value) ⇒ SetTheLine_do(line_a, character, value)
+    case SetTheLine(input_line, character, value) ⇒ SetTheLine_do(input_line, character, value)
 
     case MoveThePoint(point_a, command, value) ⇒ MoveThePoint_do(point_a, command, value)
-    case MoveTheLine(line_a, command, value) ⇒ MoveTheLine_do(line_a, command, value)
+    case MoveTheLine(input_line, command, value) ⇒ MoveTheLine_do(input_line, command, value)
 
   }
 
