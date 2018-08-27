@@ -5,9 +5,15 @@ class Gui(tk.Tk):
         super().__init__()
 
         self.title("Circuit drawing DSL")
-        self.geometry("900x800")
+        self.geometry("350x420")
 
-        self.input_text = tk.Text(self, height = 40, width = 40, bg = "white", fg = "black")
+        self.upper_label1 = tk.Label(self, text = "Welcome to Circuit-Drawing DSL!")
+        self.upper_label1.pack(side = tk.TOP)
+
+        self.upper_label2 = tk.Label(self, text = "Input left, output right.")
+        self.upper_label2.pack(side = tk.TOP)
+
+        self.input_text = tk.Text(self, height = 19, width = 20, bg = "white", fg = "black", font = "10")
         self.input_text.pack(side = tk.LEFT, fill = tk.X)
         self.input_text.focus_set()
 
