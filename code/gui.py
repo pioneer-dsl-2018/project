@@ -1,5 +1,4 @@
 import tkinter as tk
-from parser import main
 
 class Gui(tk.Tk):
     def __init__(self):
@@ -22,9 +21,11 @@ class Gui(tk.Tk):
     
     def render(self):
         input_string = self.input_text.get(1.0,tk.END)
+        from parser import main
         main(input_string)
 
-
+    
+    
 if __name__ == "__main__":
     gui = Gui()
     gui.mainloop()
