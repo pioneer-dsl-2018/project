@@ -11,17 +11,17 @@ $ pip3 install SchemDraw
 $ pip3 install matplotlib
 ```
 
-After the packages are installed, download these files and put them in a place to run. I have this new feature to simplify the steps for running this program. 
+After the packages are installed, download these files and put them in a place to run. If you prefer using a fancy graphical user interface, simply type this in the terminal
 
 ```
 python3 gui.py
 ```
 
-And the graphical user interface will looks like this:
+And the window pops out which looks like this:
 
 ![GUI](/example/gui/gui.png)
 
-If you prefer terminal, in the ```code``` directory, type this:
+If you prefer using the terminal and editing text files, in the ```code``` directory, type this:
 
 ```
 $ python3 parser.py
