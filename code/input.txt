@@ -5,7 +5,7 @@ enable draw-mode
 add battery with theta = 30
 add capacitor with theta = 90
 add resistor with theta = 20
-add cell with d = up
 
 # comments
 # automatically print out the result
+
