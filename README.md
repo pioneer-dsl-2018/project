@@ -1,5 +1,5 @@
 # Circuit-Drawing DSL
-*README UPDATED on August 23*
+*README UPDATED on August 27*
 
 ## How to use
 
@@ -11,13 +11,23 @@ $ pip3 install SchemDraw
 $ pip3 install matplotlib
 ```
 
-After the packages are installed, download these files and put them in a place to run. In the ```code``` directory, type this:
+After the packages are installed, download these files and put them in a place to run. I have this new feature to simplify the steps for running this program. 
+
+```
+python3 gui.py
+```
+
+And the graphical user interface will looks like this:
+
+![GUI](/example/gui/gui.png)
+
+If you prefer terminal, in the ```code``` directory, type this:
 
 ```
 $ python3 parser.py
 ```
 
-You should see a file called "output.png" generated in the dirctory and the prettified parse tree printed out in the terminal. Make sure the correct parse tree is printed out in the terminal!
+Both of these steps yield the same result. You should see a file called "output.png" generated in the dirctory and the prettified parse tree printed out in the terminal. Make sure the correct parse tree is printed out in the terminal!
 
 The example output image should look exactly like this:
 
@@ -78,3 +88,36 @@ add jeff to tyler in parallel
 and that yields the result
 
 ![output3](/example/add/output.png)
+
+### Modes
+
+In this program, there are several modes that let the user use. The general form of grammar for enabling modes is ```enable MODE_NAME```.
+
+There are ```hand-mode```, which makes the output circuit looks like if it was draw by hand. Continuing the able procedures, if I add,
+
+```enable hand-mode```
+
+that yields the result of this:
+
+![output4](/example/hand-mode/output.png)
+
+And draw-mode, which can literaly draw any kinds of circuit you want. After saying ```enable draw-mode```, the grammar turns into,
+
+```Add COMPONENT with ATTRIBUTES```
+
+For example,
+
+```
+# enabling modes
+enable draw-mode
+
+# procedures
+add battery with theta = 30 
+add capacitor with theta = 90
+add resistor with theta = 20
+```
+And that yields the result,
+
+![output5](/example/draw-mode/output.png)
+
+
