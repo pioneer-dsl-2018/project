@@ -6,9 +6,7 @@
 Welcome to this citcuit drawing DSL! To run this program, first install some packages on your computer. Open the terminal,
 
 ```
-$ pip3 install lark-parser
-$ pip3 install SchemDraw
-$ pip3 install matplotlib
+$ pip3 install -r requirements.txt
 ```
 
 After the packages are installed, download these files and put them in a place to run. If you prefer using a fancy graphical user interface, simply type this in the terminal
@@ -112,7 +110,7 @@ For example,
 enable draw-mode
 
 # procedures
-add battery with theta = 30 
+add battery with theta = 30
 add capacitor with theta = 90
 add resistor with theta = 20
 ```
@@ -120,4 +118,25 @@ And that yields the result,
 
 ![output5](/example/draw-mode/output.png)
 
+## Other notes
 
+### Different types of attributes
+
+```
+xy     : [x,y] starting coordiante.
+         Element drawn in current direction and default length.
+endpts : [[x1,y1], [x2,y2]] start and end coordinates
+to     : [x,y] end coordinate
+tox    : x-value of end coordinate (y-value same as start)
+toy    : y-value of end coordinate (x-value same as start)
+l      : total length of element
+zoom   : zoom/magnification for element (default=1)
+anchor : 'xy' argument refers to this position within the element.
+For example, an opamp can be anchored to 'in1', 'in2', or 'out'
+```
+
+### Component names
+
+```
+capacitor, resistor, cell, battery, dot, switch, voltmeter, ammeter, ground, line
+```
