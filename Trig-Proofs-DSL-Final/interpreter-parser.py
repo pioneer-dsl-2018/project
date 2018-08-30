@@ -7,7 +7,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 def lineEmpty(line):
     return len(line.strip()) < 1
 lines = []
-with open(dir_path + "/p.txt") as f:
+with open(dir_path + "/input-program.txt") as f:
     for line in f:
         if line.startswith('#') == False and lineEmpty(line) == False:
             line = line[:-1]
