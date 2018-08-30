@@ -11,7 +11,10 @@ class element:
         # There should be more elements this Dictionary
         library = {'capacitor': 'e.CAP', 'resistor': 'e.RES', 'cell': 'e.BAT_CELL', 'battery': 'e.BATTERY',
                    'dot': 'e.DOT','switch': 'e.SWITCH_SPST','line': 'e.LINE', 'voltmeter': 'METER_V', 'ammeter': 'METER_I',
-                   'ground':'GND'}
+                   'ground':'GND', 'source' : 'e.SOURCE', 'source_v' : 'e.SOURCE_V', 'source_i': 'e.SOURCE_I',
+                   'source_sin': 'e.SOURCE_SIN', 'source_cont':'e.SOURCE_CONT','source_cont_i':'e.SOURCE_CONT_I','source_cont_v':'e.SOURCE_CONT_V',
+                   'lamp':'e.LAMP','ohmmeter':'e.METER_OHM','ground_sig':'e.GND_SIG','ground_chassis':'e.GND_CHASSIS','vss':'e.VSS',
+                   'vdd':'e.VDD','speaker':'e.SPEAKER'}
 
         self.name = name #name is the element itself. Instead of 'capacitor', it should be 'e.CAP'
         self.label = label #label is what the user want to be appear on the circuit, it may contains values e.g. 13nC
@@ -64,7 +67,10 @@ class CompleteElement(element):
 
         library = {'capacitor': 'e.CAP', 'resistor': 'e.RES', 'cell': 'e.BAT_CELL', 'battery': 'e.BATTERY',
                    'dot': 'e.DOT','switch': 'e.SWITCH_SPST','line': 'e.LINE', 'voltmeter': 'METER_V', 'ammeter': 'METER_I',
-                   'ground':'GND'}
+                   'ground':'GND', 'source' : 'e.SOURCE', 'source_v' : 'e.SOURCE_V', 'source_i': 'e.SOURCE_I',
+                   'source_sin': 'e.SOURCE_SIN', 'source_cont':'e.SOURCE_CONT','source_cont_i':'e.SOURCE_CONT_I','source_cont_v':'e.SOURCE_CONT_V',
+                   'lamp':'e.LAMP','ohmmeter':'e.METER_OHM','ground_sig':'e.GND_SIG','ground_chassis':'e.GND_CHASSIS','vss':'e.VSS',
+                   'vdd':'e.VDD','speaker':'e.SPEAKER'}
 
         self.name = name 
         self.schemName = library[self.name]
