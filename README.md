@@ -1,39 +1,43 @@
 # Circuit-Drawing DSL
-*README UPDATED on August 27*
+*README UPDATED on August 31*
 
 ## How to use
+[*click here to see a video demo(final product)*](https://youtu.be/IH-zbR-e2kg)
 
-Welcome to this citcuit drawing DSL! To run this program, first install some packages on your computer. Open the terminal,
+Welcome to this citcuit drawing DSL! To run this program, you have to install some prerequisites. You must install a python3, and some other important python3 modules. I have these important modules written in ```requirements.txt```, to install these modules, open the terminal and type this
 
 ```
 $ pip3 install -r requirements.txt
 ```
 
-After the packages are installed, download these files and put them in a place to run. If you prefer using a fancy graphical user interface, simply type this in the terminal
+After the packages are installed, download these files and put them in a place to run. If you prefer using a fancy graphical user interface, simply type this in the terminal.**(in the ```code``` directory)**
 
 ```
 python3 gui.py
 ```
 
-And the window pops out which looks like this:
+And suddently the window pops out which looks like this:
 
-![GUI](/example/gui/gui.png)
+![GUI](/example/gui/gui.png width = 256 height = 256)
 
-If you prefer using the terminal and editing text files, in the ```code``` directory, type this:
+Otherwise, if you prefer using a terminal and editing text files, in the ```code``` directory, type this:
 
 ```
 $ python3 parser.py
 ```
+*note: if you are using terminal, you have to edit ```input.txt``` to modify input*
 
-Both of these steps yield the same result. You should see a file called "output.png" generated in the dirctory and the prettified parse tree printed out in the terminal. Make sure the correct parse tree is printed out in the terminal!
+Both of these steps yield the same result. You should see a file called ```output.png``` generated in the dirctory and the prettified **parse tree** printed out in the terminal. Make sure the correct parse tree is printed out in the terminal!
 
-The example output image should look exactly like this:
+The example output image should look something similar to this:
 
 ![output](/code/output.png)
 
-The program is now successfully ran on your computer. Modify ```input.txt``` to make different outputs!
+The program is now successfully ran on your computer! Try out different grammars.
 
 ## Grammars
+
+There are four main types of grammars in this DSL: **enabling modes**, **declaring elements**, **adding elements**, and most importantly, **connecting** two elements
 
 ### Decalring elements
 it is quite easy to declaring an new elements, it follows the following format
@@ -52,7 +56,7 @@ or
 resistor tyler is 20 Omega
 ```
 
-### Connecting
+### Connecting two elements
 Good, so now we have two elements in our hand. Now we are going to manipulate them. To connct these two elements in series, simply say
 
 ```
