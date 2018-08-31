@@ -18,7 +18,7 @@ python3 gui.py
 
 And suddently the window pops out which looks like this:
 
-![GUI](/example/gui/gui.png width = 256 height = 256)
+![GUI](/example/gui/gui.png)
 
 Otherwise, if you prefer using a terminal and editing text files, in the ```code``` directory, type this:
 
@@ -45,19 +45,20 @@ it is quite easy to declaring an new elements, it follows the following format
 ```
 ELEMENT_NAME ALIAS is NUMBER UNIT
 ```
+*note: if an element does not have a number of a unit, simply omit* ```is NUMBER UNIT```
 
-So i can say,
+To declare a ```cell``` element whose alias is ```harry``` and is 999 volts I say
 ```
 cell harry is 999 V
 ```
 
-or
+giving another example, a ```resistor``` element whose alias is ```tyler``` and contains 20 Omega of resistance, I say
 ```
 resistor tyler is 20 Omega
 ```
 
 ### Connecting two elements
-Good, so now we have two elements in our hand. Now we are going to manipulate them. To connct these two elements in series, simply say
+Good, so now we have two elements in our hand. We are going to manipulate them. To connct these two elements in series, simply say
 
 ```
 connect harry and tyler in series
@@ -65,8 +66,9 @@ connect harry and tyler in series
 and that will produce an image like this
 
 ![output1](/example/series/output.png)
+*note: there must be a* ```connect``` *statement in an individual program, it works like a* **main function**
 
-Or, we can connect them in parallel, simply say
+Otherwise, we can connect them in parallel, simply change the part that came after ```in```,
 
 ```
 connect harry and tyler in parallel
@@ -78,7 +80,7 @@ and. . . that will produce this:
 
 ### Mutating
 
-We can add a element to another element in series or in parallel, for example, if we have another element declared:
+After having a base, we can add a element to another element in series or in parallel, for example, if I have another element declared right after the above program:
 
 ```
 # declaration
@@ -87,7 +89,7 @@ battery jeff is 10 V
 # mutation
 add jeff to tyler in parallel
 ```
-and that yields the result
+After I added a **mutation** procedure, that yields the result
 
 ![output3](/example/add/output.png)
 
@@ -103,7 +105,7 @@ that yields the result of this:
 
 ![output4](/example/hand-mode/output.png)
 
-And draw-mode, which can literaly draw any kinds of circuit you want. After saying ```enable draw-mode```, the grammar turns into,
+And ```draw-mode```, which can literaly draw any kinds of circuit you want. After saying ```enable draw-mode```, the grammar turns into,
 
 ```Add COMPONENT with ATTRIBUTES```
 
@@ -142,5 +144,5 @@ For example, an opamp can be anchored to 'in1', 'in2', or 'out'
 ### Component names
 
 ```
-capacitor, resistor, cell, battery, dot, switch, voltmeter, ammeter, ground, line
+capacitor, resistor, cell, battery, dot, switch, voltmeter, ammeter, ground, line, switch, and more!
 ```
