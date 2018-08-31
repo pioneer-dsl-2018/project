@@ -12,8 +12,8 @@ package object back {
   def DrawWithCompass_do(center: Point, radius: Double, rotate: Rotation): Unit = {
     StdDraw.setPenRadius(center.thickness)
     StdDraw.setPenColor(color_interpreter(center.color))
-    if(rotate.direction == Direction("counter-clockwise")){
-      StdDraw.arc(center.x_coordinate, center.y_coordinate, radius, rotate.start_degree, rotate.start_degree-(rotate.start_degree-rotate.end_degree))
+    if(rotate.direction == Direction("clockwise")){
+      StdDraw.arc(center.x_coordinate, center.y_coordinate, radius, 360-rotate.end_degree, 360+rotate.start_degree)
     }
     else{
       StdDraw.arc(center.x_coordinate, center.y_coordinate, radius, rotate.start_degree, rotate.end_degree)
@@ -21,8 +21,9 @@ package object back {
   }
 
   def MarkThePoint_do(a: Point, b: String): String = {
+    var temp = b
     var output: String = "(" + a.x_coordinate + "," + a.y_coordinate + ")"
-    println("Successfully assign point(" + a.x_coordinate + "," + a.y_coordinate + ") to " + b)
+    println("Successfully assign point( " + a.x_coordinate + "," + a.y_coordinate + ") to " + b)
     output
   }
 
@@ -60,6 +61,9 @@ package object back {
     else if (value == "yellow"){
       StdDraw.YELLOW
     }
+    else if (value == "blue"){
+      StdDraw.BLUE
+    }
     else {
       StdDraw.BLACK
     }
@@ -69,23 +73,29 @@ package object back {
     StdDraw.setPenRadius(point_a.thickness+0.001)
     StdDraw.setPenColor(StdDraw.WHITE)
     StdDraw.point(point_a.x_coordinate, point_a.y_coordinate)
+    StdDraw.setPenColor(StdDraw.BLACK)
   }
 
   def RemoveTheLine_do(input_line: Line): Unit = {
     StdDraw.setPenRadius(input_line.thickness+0.001)
     StdDraw.setPenColor(StdDraw.WHITE)
     StdDraw.line(input_line.start_point.x_coordinate, input_line.start_point.y_coordinate, input_line.end_point.x_coordinate, input_line.end_point.y_coordinate)
+    StdDraw.setPenColor(StdDraw.BLACK)
   }
 
   def SetThePoint_do(point_a: Point, character: String, value: String): Unit = {
     if (character == "color"){
       RemoveThePoint_do(point_a)
+      var point_a.color = value
+      StdDraw.setPenRadius(point_a.thickness)
       StdDraw.setPenColor(color_interpreter(value))
       StdDraw.point(point_a.x_coordinate, point_a.y_coordinate)
     }
     else if (character == "thickness"){
       RemoveThePoint_do(point_a)
+      var point_a.thickness = value.toDouble
       StdDraw.setPenRadius(value.toDouble)
+      StdDraw.setPenColor(color_interpreter(point_a.color))
       StdDraw.point(point_a.x_coordinate, point_a.y_coordinate)
     }
     else{
@@ -96,12 +106,16 @@ package object back {
   def SetTheLine_do(input_line: Line, character: String, value: String): Unit = {
     if (character == "color"){
       RemoveTheLine_do(input_line)
+      var input_line.color = value
+      StdDraw.setPenRadius(input_line.thickness)
       StdDraw.setPenColor(color_interpreter(value))
       StdDraw.line(input_line.start_point.x_coordinate, input_line.start_point.y_coordinate, input_line.end_point.x_coordinate, input_line.end_point.y_coordinate)
     }
     else if (character == "thickness"){
       RemoveTheLine_do(input_line)
+      var input_line.thickness = value.toDouble
       StdDraw.setPenRadius(value.toDouble)
+      StdDraw.setPenColor(color_interpreter(input_line.color))
       StdDraw.line(input_line.start_point.x_coordinate, input_line.start_point.y_coordinate, input_line.end_point.x_coordinate, input_line.end_point.y_coordinate)
     }
     else{
@@ -115,6 +129,7 @@ package object back {
       RemoveThePoint_do(point_a)
       // draw the new point
       StdDraw.setPenColor(color_interpreter(point_a.color))
+      StdDraw.setPenRadius(point_a.thickness)
       StdDraw.point(point_a.x_coordinate, point_a.y_coordinate + value)
     }
     else if (command == "down"){
@@ -122,6 +137,7 @@ package object back {
       RemoveThePoint_do(point_a)
       // draw the new point
       StdDraw.setPenColor(color_interpreter(point_a.color))
+      StdDraw.setPenRadius(point_a.thickness)
       StdDraw.point(point_a.x_coordinate, point_a.y_coordinate - value)
     }
     else if (command == "left"){
@@ -129,6 +145,7 @@ package object back {
       RemoveThePoint_do(point_a)
       // draw the new point
       StdDraw.setPenColor(color_interpreter(point_a.color))
+      StdDraw.setPenRadius(point_a.thickness)
       StdDraw.point(point_a.x_coordinate - value, point_a.y_coordinate)
     }
     else if (command == "right"){
@@ -136,6 +153,7 @@ package object back {
       RemoveThePoint_do(point_a)
       // draw the new point
       StdDraw.setPenColor(color_interpreter(point_a.color))
+      StdDraw.setPenRadius(point_a.thickness)
       StdDraw.point(point_a.x_coordinate + value, point_a.y_coordinate)
     }
     else{
@@ -149,6 +167,7 @@ package object back {
       RemoveTheLine_do(input_line)
       // draw the new line
       StdDraw.setPenColor(color_interpreter(input_line.color))
+      StdDraw.setPenRadius(input_line.thickness)
       StdDraw.line(input_line.start_point.x_coordinate, input_line.start_point.y_coordinate + value, input_line.end_point.x_coordinate, input_line.end_point.y_coordinate + value)
     }
     else if (command == "down"){
@@ -156,6 +175,7 @@ package object back {
       RemoveTheLine_do(input_line)
       // draw the new line
       StdDraw.setPenColor(color_interpreter(input_line.color))
+      StdDraw.setPenRadius(input_line.thickness)
       StdDraw.line(input_line.start_point.x_coordinate, input_line.start_point.y_coordinate - value, input_line.end_point.x_coordinate, input_line.end_point.y_coordinate - value)
     }
     else if (command == "left"){
@@ -163,6 +183,7 @@ package object back {
       RemoveTheLine_do(input_line)
       // draw the new line
       StdDraw.setPenColor(color_interpreter(input_line.color))
+      StdDraw.setPenRadius(input_line.thickness)
       StdDraw.line(input_line.start_point.x_coordinate - value, input_line.start_point.y_coordinate, input_line.end_point.x_coordinate - value, input_line.end_point.y_coordinate)
     }
     else if (command == "right"){
@@ -170,6 +191,7 @@ package object back {
       RemoveTheLine_do(input_line)
       // draw the new line
       StdDraw.setPenColor(color_interpreter(input_line.color))
+      StdDraw.setPenRadius(input_line.thickness)
       StdDraw.line(input_line.start_point.x_coordinate + value, input_line.start_point.y_coordinate, input_line.end_point.x_coordinate + value, input_line.end_point.y_coordinate)
     }
     else{
