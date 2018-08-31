@@ -19,8 +19,8 @@ package object back {
     else if (value == "yellow"){
       StdDraw.YELLOW
     }
-    else if (value == "blue"){
-      StdDraw.BLUE
+    else if (value == "pink"){
+      StdDraw.PINK
     }
     else {
       StdDraw.BLACK
