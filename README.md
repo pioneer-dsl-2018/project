@@ -1,10 +1,12 @@
 # Circuit-Drawing DSL
 *README UPDATED on August 31*
+[*Click here to see a video demo(final product)*](https://youtu.be/IH-zbR-e2kg)
 
 ## How to use
-[*click here to see a video demo(final product)*](https://youtu.be/IH-zbR-e2kg)
 
-Welcome to this citcuit drawing DSL! To run this program, you have to install some prerequisites. You must install a python3, and some other important python3 modules. I have these important modules written in ```requirements.txt```, to install these modules, open the terminal and type this
+**Welcome to this citcuit drawing DSL!**
+
+To run this program, you have to install some prerequisites. The most important one is **python3**, which you could easily get them on the official site, and some other important python3 modules. I have these important modules written in ```requirements.txt```, to install these modules, open the terminal and type the following command
 
 ```
 $ pip3 install -r requirements.txt
@@ -27,7 +29,7 @@ $ python3 parser.py
 ```
 *note: if you are using terminal, you have to edit ```input.txt``` to modify input*
 
-Both of these steps yield the same result. You should see a file called ```output.png``` generated in the dirctory and the prettified **parse tree** printed out in the terminal. Make sure the correct parse tree is printed out in the terminal!
+Both of these steps yield the same result. You should see a file called ```output.png``` generated in the dirctory and the prettified **parse tree** printed out in the terminal. Make sure the correct parse tree is printed out in the terminal!
 
 The example output image should look something similar to this:
 
@@ -66,6 +68,7 @@ connect harry and tyler in series
 and that will produce an image like this
 
 ![output1](/example/series/output.png)
+
 *note: there must be a* ```connect``` *statement in an individual program, it works like a* **main function**
 
 Otherwise, we can connect them in parallel, simply change the part that came after ```in```,
