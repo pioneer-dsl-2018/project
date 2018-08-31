@@ -1,0 +1,18 @@
+# enabling modes
+enable hand-mode
+
+# declaring elements
+cell java is 10 V
+resistor python is 10 Omega
+voltmeter scala
+ammeter javascript 
+line prolog is 10 meters
+switch clang 
+
+# procedures
+connect java and python in parallel
+add javascript to python in series
+add prolog to javascript in parallel
+add clang to python in series
+add scala to clang in parallel
+

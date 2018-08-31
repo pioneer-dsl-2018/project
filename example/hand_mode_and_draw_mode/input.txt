@@ -1,0 +1,12 @@
+# enabling modes
+enable draw-mode
+enable hand-mode
+
+# in draw-mode, we directly add elements instead of declaring
+# theta is the angle above horizontal, zoom makes the element bigger
+
+add switch with d = right zoom = 3
+add capacitor with theta = 120 zoom = 3
+add line with d = right zoom = 3
+add source with d = up zoom = 4
+add voltmeter with d = right
