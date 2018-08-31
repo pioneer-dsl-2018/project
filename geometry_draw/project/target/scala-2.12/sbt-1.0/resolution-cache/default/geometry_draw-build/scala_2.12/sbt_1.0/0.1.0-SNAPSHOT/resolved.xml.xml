@@ -4,7 +4,7 @@
 		module="geometry_draw-build"
 		revision="0.1.0-SNAPSHOT"
 		status="integration"
-		publication="20180703155012"
+		publication="20180831203955"
 		e:sbtVersion="1.0" e:scalaVersion="2.12"
 	>
 		<description>

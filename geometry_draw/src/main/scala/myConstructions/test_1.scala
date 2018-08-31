@@ -1,11 +1,11 @@
 package myConstructions
 
-import geometry_draw._
+import geometry_draw.Parser
 
 import scala.tools.nsc.EvalLoop
 import geometry_draw.back.evaluate
 
-object test_1 extends EvalLoop with App {
+object main extends EvalLoop with App {
   override def prompt = "> "
 
   loop { line ⇒
@@ -15,14 +15,3 @@ object test_1 extends EvalLoop with App {
     }
   }
 }
-
-//object TestStdDraw extends EvalLoop with App {
-//  override def prompt = "> "
-//
-//  loop { line ⇒
-//    Parser(line) match {
-//      case Parser.Success(action, _) ⇒
-//      case e: Parser.NoSuccess ⇒ println(e)
-//    }
-//  }
-//}
