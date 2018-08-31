@@ -1,10 +1,11 @@
 # Circuit-Drawing DSL
-*README UPDATED on August 31*
-[*Click here to see a video demo(final product)*](https://youtu.be/IH-zbR-e2kg)
+- *README UPDATED on August 31*
+
+- [*Click here to see a video demo(final product)*](https://youtu.be/IH-zbR-e2kg)
 
 ## How to use
 
-**Welcome to this citcuit drawing DSL!**
+**Welcome to my Circuit-Drawing DSL!**
 
 To run this program, you have to install some prerequisites. The most important one is **python3**, which you could easily get them on the official site, and some other important python3 modules. I have these important modules written in ```requirements.txt```, to install these modules, open the terminal and type the following command
 
@@ -41,7 +42,7 @@ The program is now successfully ran on your computer! Try out different grammars
 
 There are four main types of grammars in this DSL: **enabling modes**, **declaring elements**, **adding elements**, and most importantly, **connecting** two elements
 
-### Decalring elements
+### Declaring elements
 it is quite easy to declaring an new elements, it follows the following format
 
 ```
