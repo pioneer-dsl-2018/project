@@ -2,7 +2,7 @@
 *README UPDATED on August 27*
 
 ## How to use
-![*click here to see a video demo(final product)*][https://youtu.be/IH-zbR-e2kg]
+[*click here to see a video demo(final product)*](https://youtu.be/IH-zbR-e2kg)
 
 Welcome to this citcuit drawing DSL! To run this program, first install some packages on your computer. Open the terminal,
 
