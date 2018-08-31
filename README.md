@@ -10,7 +10,7 @@
 6. Type in the *number* and **Enter**
 7. The successful image should be like this
 
-!(https://github.com/harrylyf/project/blob/master/img/img1.png)
+![this](https://github.com/harrylyf/project/blob/master/img/img1.png)
 
 
 ## Starting Use
