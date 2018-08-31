@@ -3,6 +3,30 @@ package geometry_draw
 import java.awt.Color
 
 package object back {
+  def color_interpreter(value: String): Color = {
+    if (value == "blue"){
+      StdDraw.BLUE
+    }
+    else if (value == "gray"){
+      StdDraw.GRAY
+    }
+    else if (value == "red"){
+      StdDraw.RED
+    }
+    else if (value == "green"){
+      StdDraw.GREEN
+    }
+    else if (value == "yellow"){
+      StdDraw.YELLOW
+    }
+    else if (value == "blue"){
+      StdDraw.BLUE
+    }
+    else {
+      StdDraw.BLACK
+    }
+  }
+
   def DrawWithRuler_do(a: Point, b: Point): Unit = {
     StdDraw.setPenRadius(a.thickness)
     StdDraw.setPenColor(color_interpreter(a.color))
@@ -45,30 +69,6 @@ package object back {
 
   }
 
-  def color_interpreter(value: String): Color = {
-    if (value == "blue"){
-      StdDraw.BLUE
-    }
-    else if (value == "gray"){
-      StdDraw.GRAY
-    }
-    else if (value == "red"){
-      StdDraw.RED
-    }
-    else if (value == "green"){
-      StdDraw.GREEN
-    }
-    else if (value == "yellow"){
-      StdDraw.YELLOW
-    }
-    else if (value == "blue"){
-      StdDraw.BLUE
-    }
-    else {
-      StdDraw.BLACK
-    }
-  }
-
   def RemoveThePoint_do(point_a: Point): Unit = {
     StdDraw.setPenRadius(point_a.thickness+0.001)
     StdDraw.setPenColor(StdDraw.WHITE)
@@ -86,14 +86,12 @@ package object back {
   def SetThePoint_do(point_a: Point, character: String, value: String): Unit = {
     if (character == "color"){
       RemoveThePoint_do(point_a)
-      var point_a.color = value
       StdDraw.setPenRadius(point_a.thickness)
       StdDraw.setPenColor(color_interpreter(value))
       StdDraw.point(point_a.x_coordinate, point_a.y_coordinate)
     }
     else if (character == "thickness"){
       RemoveThePoint_do(point_a)
-      var point_a.thickness = value.toDouble
       StdDraw.setPenRadius(value.toDouble)
       StdDraw.setPenColor(color_interpreter(point_a.color))
       StdDraw.point(point_a.x_coordinate, point_a.y_coordinate)
@@ -106,14 +104,12 @@ package object back {
   def SetTheLine_do(input_line: Line, character: String, value: String): Unit = {
     if (character == "color"){
       RemoveTheLine_do(input_line)
-      var input_line.color = value
       StdDraw.setPenRadius(input_line.thickness)
       StdDraw.setPenColor(color_interpreter(value))
       StdDraw.line(input_line.start_point.x_coordinate, input_line.start_point.y_coordinate, input_line.end_point.x_coordinate, input_line.end_point.y_coordinate)
     }
     else if (character == "thickness"){
       RemoveTheLine_do(input_line)
-      var input_line.thickness = value.toDouble
       StdDraw.setPenRadius(value.toDouble)
       StdDraw.setPenColor(color_interpreter(input_line.color))
       StdDraw.line(input_line.start_point.x_coordinate, input_line.start_point.y_coordinate, input_line.end_point.x_coordinate, input_line.end_point.y_coordinate)
