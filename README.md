@@ -4,7 +4,7 @@
 ## How to use
 [*click here to see a video demo(final product)*](https://youtu.be/IH-zbR-e2kg)
 
-Welcome to this citcuit drawing DSL! To run this program, first install some packages on your computer. Open the terminal,
+Welcome to this citcuit drawing DSL! To run this program, you have to install some prerequisites. You must install a python3, and some other important python3 modules. I have these important modules written in ```requirements.txt```, to install these modules, open the terminal and type this
 
 ```
 $ pip3 install -r requirements.txt
@@ -18,7 +18,7 @@ python3 gui.py
 
 And the window pops out which looks like this:
 
-![GUI](/example/gui/gui.png)
+![GUI](/example/gui/gui.png = 300x400)
 
 If you prefer using the terminal and editing text files, in the ```code``` directory, type this:
 
