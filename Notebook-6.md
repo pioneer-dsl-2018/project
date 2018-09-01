@@ -2,29 +2,13 @@
 
 ## Last week's critique
 
-**TODO:** Fill in this part with a summary and reflection on the critique you
-received for last week's work. Answer questions such as:  How, specifically, did
-the feedback help improve the project? Did the feedback point out or offer
-something you hadn't considered? Did it help you make a design decision? Was it 
-helpful in addressing the most pressing issues in your project? How will you
-incorporate the feedback into your work? Will you change something about the 
-design, implementation, or evaluation as a result?
+As of last week, my DSL was primarily an internal DSL in that it was extremely dependent on its host-language Python. While I made use of chaining and object-oriented programming in order to add fluency to the DSL, the host-flavour was prominent. Dr. Wiedermann’s feedback to try to instead use pyparsing and implement the DSL as an external – rather than an internal DSL – facilitated me greatly in overcoming this challenge and adding syntactic sugar to the trigonometric-proofs DSL. This is something I had not initially considered since my initial estimate on how long the internal DSL would take to implement was a little greater than the amount of time it factually took. It helped me make the design decision to do so. In order to incorporate this feedback into my work, I have spent a majority of the last week understanding parsing and splicing of strings in order to be able to parse and interpret a program in my language using Python. Moreover, I have attempted to come up with a list of possible syntax and other more intricate errors which the DSL checks for during the parsing and interpreting of the program.
 
 ## Description
 
-**TODO:** Fill in this part with a description of the work you did this week:
-tasks you did, important design decisions you made, changes to previous
-decisions, questions that you discovered while working, a feature you finished,
-etc. Include images (e.g., a sketch of the design or a screenshot of a running
-program), links to code in your GitHub repo, and any other resources that you
-think will help clearly convey your design process.
+Last week, the trigonometric proofs domain-specific language was at a stage wherein users could create an object ``expr`` by defining three of its fundamental parameters, the equation to be proven, the number of steps required for the same, and the side of the equation which is to be transformed. They could then make use of chaining with the ``transform`` method and hence define which identities or algebraic transformations are to be performed on the expression they have selected. One of the greatest predicaments with this was that the DSL was still greatly dependent on its host-language, i.e. Python. This meant that the syntax to be used was that of Python, therefore potential users of the language who are unfamiliar with computer science might’ve struggled with the syntax or found it inconvenient to use. Dr. Wiedermann’s feedback and guidance on the idea and the method of implementing an external DSL instead, in order to add fluency to, and remove host flavour from my language – and thus make it easier for domain users to employ – facilitated me greatly in overcoming this challenge. Over the last week, I was able to comprehend the basic functionality of pyparsing and string splicing. I then implemented an interpreter as a separate program from the file which defines the class and methods required for the actual computation. At the moment, the interpreter essentially breaks down the entire program into a list of its constituent lines. It keeps count of the number of proofs by checking for the number of lines in the list which begin with ``new_proof``, it then parses the subsequent lines in order to obtain the equation, the side to begin from, the number of steps, and the steps themselves. All of these are then appended to four separate arrays such that the indices of all the parameters which belong to a single proof correspond with each-other. The interpreter then runs a definite loop for the number of proofs present in the program, wherein it uses the objects and methods defined last week in order to actually output the steps of the proof.
 
 ## Questions for you to answer
 
-**What is the most important issue for your project? For example, what design decision do
-you need to make, or what implementation issue are you trying to solve?**
+I am presently working on coming up with a list of all possible logical and syntax errors which can occur when a user is writing a program in this DSL. In addition to this, the interpreter is presently unable to account for errors in the whitespace, be it in the programming statement itself or between two programming statements. This means that any deviation from the syntax and the standard of having a single whitespace between the defining keyword and the expression itself results in an error. Furthermore, it is not presently possible to make any comments in the language. I am attempting to refine these problems so as to enable the interpreter to ignore any lines which contain whitespace and/or a comment (indicated by a pound sign), and also checks for and ignores any comments beginning with a pound sign within a line which contains a programming statement (given that the programming statement precedes the comment.
 
-**What questions do you have for your critique partner? What feedback can they
-give you that would help you the most?**
-
-**How much time did you spend on the project this week?**
