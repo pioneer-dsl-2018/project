@@ -18,6 +18,7 @@ with open(dir_path + "/input-program.txt") as f:
         if "#" in line:
             line = line.split("#", 1)
             lines[x] = line[0]
+        lines[x] = lines[x].strip()
 
 #parser and interpreter
 
@@ -36,6 +37,12 @@ syntaxError = False
 for i in range(len(lines)):
     if lines[i] == "new_proof:":
         numProofs = numProofs + 1
+        if (lines[i + 1]).startswith("expr:") != True or lines[i + 2].startswith("steps:") != True or lines[i + 3].startswith("startFrom:") != True:
+            print "Proof #" + str(numProofs) + " is not structured as expected. Please structure the proof as:\nnew_proof\nexpr: equation\nsteps: number-of-steps\nstartFrom: LHS/RHS\nsteps"
+            syntaxError = True
+            break
+
+
         expression = lines[i + 1]
         numSteps = lines[i + 2]
         startFrom = lines[i + 3]

@@ -80,7 +80,7 @@ class expr(object):
             LHS = sympify(LHS)
             RHS = sympify(RHS)
         randomAngles = []
-        for i in range(10):
+        for i in range(25):
             randomAngle = random.randint(-360, 360)
             LHSVal = round(LHS.evalf(subs = {x: radians(randomAngle)}), 5)
             RHSVal = round(RHS.evalf(subs = {x: radians(randomAngle)}), 5)
@@ -100,4 +100,3 @@ class expr(object):
             else:
                 if str(LHS) == str(otherSide):
                     return True
-                
