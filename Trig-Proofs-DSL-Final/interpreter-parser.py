@@ -13,10 +13,11 @@ with open(dir_path + "/input-program.txt") as f:
             line = line[:-1]
             lines.append(line)
 
-            for line in lines:
-                if "#" in line:
-                    line = line.split("#", 1)
-                    line = line[1]
+    for x in range(len(lines)):
+        line = lines[x]
+        if "#" in line:
+            line = line.split("#", 1)
+            lines[x] = line[0]
 
 #parser and interpreter
 
