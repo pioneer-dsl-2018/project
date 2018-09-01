@@ -48,9 +48,8 @@ class expr(object):
             expres = factor(expres)
         elif step == "simplify":
             expres = simplify(expres)
-        elif step == "csc(x)=1/sin(x)" or step == "sec(x)=1/cos(x)" or step == "1/sin(x)=csc(x)" or step == "1/cos(x)=sec(x)" or step == "1/tan(x)=cot(x)":
+        elif step == "csc(x)=1/sin(x)" or step == "sec(x)=1/cos(x)":
             expres = (FU['TR1'](expres))
-            expres = (FU['TR111'](expres))
         elif step == "tan(x)=sin(x)/cos(x)" or step == "cot(x)=cos(x)/sin(x)":
             expres = (FU['TR2'](expres))
         elif step == "sin(x)**2+cos(x)**2=1":
@@ -67,6 +66,8 @@ class expr(object):
             expres = (FU['TR11'](expres))
         elif step == "tan(a+b)=(tan(a)+tan(b))/(-tan(a)*tan(b)+1)" or step == "tan(a+b) = (tan(a)-tan(b))/(tan(a)*tan(b)+1)":
             expres = (FU['TR12'(expres)])
+        elif step == "1/sin(x)=csc(x)" or step == "1/cos(x)=sec(x)" or step == "1/tan(x)=cot(x)":
+            expres = (FU['TR111'](expres))
         elif step == "tan(x)**2+1=sec(x)**2" or step == "cot(x)**2+1=csc(x)**2":
             expres = (FU['TR22'(expres)])
         print expres
@@ -81,7 +82,7 @@ class expr(object):
             LHS = sympify(LHS) #converting LHS and RHS into sympy expressions for evaluation
             RHS = sympify(RHS)
         randomAngles = []
-        for i in range(45): #generating 25 random values between -360 and 360 degrees to see whether or not LHS = RHS for all of these
+        for i in range(45): #generating 45 random values between -360 and 360 degrees to see whether or not LHS = RHS for all of these
             randomAngle = random.randint(-360, 360)
             LHSVal = round(LHS.evalf(subs = {x: radians(randomAngle)}), 5) #rounding off to 5 decimal places in order to avoid discrepancies due to rounding
             RHSVal = round(RHS.evalf(subs = {x: radians(randomAngle)}), 5)

@@ -24,4 +24,4 @@ startFrom: LHS
 step1: tan(x)=sin(x)/cos(x)
 step2: factor
 step3: sin(x)**2 + cos(x)**2 = 1
-step4: csc(x)=1/sin(x)
+step4: 1/sin(x) = csc(x)
