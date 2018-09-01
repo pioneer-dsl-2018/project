@@ -1,8 +1,8 @@
 #example program 1
 new_proof:
 expr: 1 + 1/tan(x) = (sin(x) + cos(x))/sin(x)
+steps: 3 
 startFrom: LHS
-steps: 3
 step1: factor
 step2: tan(x) = sin(x)/cos(x)
 step3: expand 
