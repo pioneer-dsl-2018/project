@@ -8,6 +8,10 @@ This Domain-Specific Language caters to the domain of mathematics and the sub-do
 
 This language intends to help overcome just that predicament by facilitating you to verify and perform transformations on trigonometric identities and expressions respectively. The syntax of this language - in spite of it being implemented using the higher-level programming language Python - is extremely simple. It is structure dependent, however, apart from that it is relatively flexible in that you only need to input your equation, the number of steps, the side to be transformed and the justification for each step, and voila! The compiler outputs all the steps of your proof. You can use this to not only perform a complete proof, but also to see whether or not your idea of using a certain identity will take you in the right direction. You can thus focus completely on the proof itself rather than the details of the transformation.
 
+## Video
+
+https://youtu.be/0gRX6SBdefk
+
 ## Installation and Use
 
 In order to install and use this language on your computer, you only need to perform the following steps:
