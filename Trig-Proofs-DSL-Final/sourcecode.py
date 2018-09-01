@@ -81,7 +81,7 @@ class expr(object):
             LHS = sympify(LHS) #converting LHS and RHS into sympy expressions for evaluation
             RHS = sympify(RHS)
         randomAngles = []
-        for i in range(25): #generating 25 random values between -360 and 360 degrees to see whether or not LHS = RHS for all of these
+        for i in range(45): #generating 25 random values between -360 and 360 degrees to see whether or not LHS = RHS for all of these
             randomAngle = random.randint(-360, 360)
             LHSVal = round(LHS.evalf(subs = {x: radians(randomAngle)}), 5) #rounding off to 5 decimal places in order to avoid discrepancies due to rounding
             RHSVal = round(RHS.evalf(subs = {x: radians(randomAngle)}), 5)

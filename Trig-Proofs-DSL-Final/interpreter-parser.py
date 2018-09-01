@@ -39,7 +39,7 @@ for i in range(len(lines)): #iterating through all the lines
     if lines[i] == "new_proof:":
         numProofs = numProofs + 1
         #checking for the structure
-        if (lines[i + 1]).startswith("expr:") != True or lines[i + 2].startswith("steps:") != True or lines[i + 3].startswith("startFrom:") != True:
+        if (lines[i + 1]).startswith("expr") != True or lines[i + 2].startswith("steps") != True or lines[i + 3].startswith("startFrom") != True:
             print "Proof #" + str(numProofs) + " is not structured as expected. Please structure the proof as:\nnew_proof\nexpr: equation\nsteps: number-of-steps\nstartFrom: LHS/RHS\nsteps"
             syntaxError = True
             break
@@ -56,12 +56,12 @@ for i in range(len(lines)): #iterating through all the lines
             break
 
         if not "steps:" or "Steps:" in numSteps:
-            print "Syntax error in line " + str(i + 2) + "." " Please define new expression with 'steps:' and recompile."
+            print "Syntax error in line " + str(i + 2) + "." " Please define number of steps with 'steps:' and recompile."
             syntaxError = True
             break
 
         if not "startFrom:" or "startfrom:" in numSteps:
-            print "Syntax error in line " + str(i + 3) + "." " Please define new expression with 'startFrom:' and recompile."
+            print "Syntax error in line " + str(i + 3) + "." " Please define the side to be transformed with 'startFrom:' and recompile."
             syntaxError = True
             break
 
@@ -81,7 +81,7 @@ for i in range(len(lines)): #iterating through all the lines
             #i is the index of the line where the proof begins, s is the index with reference to the line where the first step occurs, and +4 in order to account for the number of lines between the definition of a new proof and the beginning of the steps
             stepLineX = lines[i + s + 4]
             if stepLineX.startswith("step") == False: #checking if the number of steps matches the expected number by ensuring that the expected number of lines begin with step:
-                print "Number of steps entered does not match expected number of steps. Number of steps expected were " + str(numStepsX) + ", but number of steps entered were " + str(1) + "."
+                print "For proof #" + str(numProofs) + ", input number of steps entered does not match expected number of steps. Number of steps expected were " + str(numStepsX) + ", but number of steps entered were " + str(s) + "."
                 syntaxError = True
                 break
 
