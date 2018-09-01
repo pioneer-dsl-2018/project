@@ -1,0 +1,27 @@
+    expression: (set_label | connection | mutation | set_mode | draw_element)+
+
+    set_label: components alias "is" label | components alias
+    connection: "connect" components "in" CONNECTION_TYPE
+    mutation: MUTATE components "to" components "in" CONNECTION_TYPE
+    set_mode: "enable" MODE
+    draw_element: "add" components "with" attributes | "add" components 
+    
+
+    components: alias | alias "and" alias
+    label: NUMBER UNIT | NUMBER
+    alias: ALIAS
+    attributes: (ATTRIBUTE "=" ALIAS | ATTRIBUTE "=" NUMBER)+
+
+    ALIAS: /[a-zA-Z_]\w*/
+    MUTATE: "add" | "drop"
+    COMPONENT: "capacitor" | "resistor" | "battery"
+    CONNECTION_TYPE: "series" | "parallel"
+    UNIT: /[a-zA-Z_]\w*/
+    NUMBER: /0|[1-9]\d*/
+    COMMENT: /#[^\n]*/
+    MODE: "calculator" | "hand-mode" | "draw-mode"
+    ATTRIBUTE: ("d" | "xy" | "endpts" | "to" | "tox" | "toy" | "l" | "zoom" | "anchor" | "d" | "theta" | "label")
+
+    %import common.WS
+    %ignore COMMENT
+    %ignore WS

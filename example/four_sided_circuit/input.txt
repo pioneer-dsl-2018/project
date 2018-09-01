@@ -1,0 +1,10 @@
+# enabling modes
+enable draw-mode
+
+# in draw-mode, we directly add elements instead of declaring
+# the parameter d is the abbreviation of direction
+
+add capacitor with d = right
+add resistor with d = down
+add voltmeter with d = left
+add ammeter with d = up

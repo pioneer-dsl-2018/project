@@ -1,0 +1,6 @@
+resistor tyler is 20 Om
+cell Harry is 999 V
+
+connect Harry and tyler in series
+
+#automatically print out the result

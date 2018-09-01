@@ -1,0 +1,13 @@
+# declaring elements
+
+cell Harry is 999 V
+resistor tyler is 20 Omega
+battery jeff is 10 V
+
+
+# procedures
+connect Harry and tyler in parallel
+
+
+# comments
+# automatically print out the result

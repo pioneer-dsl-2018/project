@@ -1,0 +1,8 @@
+# setting modes
+
+enable draw-mode
+
+add capacitor with d = right xy = 1 theta = 20
+
+# comments
+# automatically print out the result

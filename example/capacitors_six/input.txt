@@ -1,0 +1,17 @@
+# enabling modes
+
+# declaring elements
+capacitor java is 10 C
+capacitor python is 10 C
+capacitor scala is 10 C
+capacitor javascript is 10 C
+capacitor prolog is 10 C
+capacitor clang is 10 C
+
+# procedures
+connect java and python in series
+add scala to python in series
+add javascript to python in series
+add prolog to python in series
+add clang to python in series
+

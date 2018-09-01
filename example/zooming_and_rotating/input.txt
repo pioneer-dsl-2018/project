@@ -1,0 +1,10 @@
+# enabling modes
+enable draw-mode
+
+# in draw-mode, we directly add elements instead of declaring
+# theta is the angle above horizontal, zoom makes the element bigger
+
+add ground with theta = 30 zoom = 3
+add capacitor with theta = 120 zoom = 4
+add cell with d = right zoom = 6
+add source with d = up zoom = 7
