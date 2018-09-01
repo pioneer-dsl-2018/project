@@ -9,7 +9,7 @@ step3: expand
 
 #example program 2
 new_proof:
-expr: sin(x) * (1 + tan(x)) = (sin(x) + cos(x))*tan(x)
+expr: sin(x) * (1 + tan(x)) = (sin(x) + cos(x))*tan(x) #this is a comment
 steps: 4
 startFrom: LHS
 step1: expand
