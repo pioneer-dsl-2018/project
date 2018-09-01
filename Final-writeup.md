@@ -143,4 +143,4 @@ The back-end of this DSL is another Python program which is responsible for defi
 
 ## Evaluation
 
-I believe that this trigonometric-proofs domain-specific language is 
+I believe that this trigonometric-proofs domain-specific language is
