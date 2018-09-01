@@ -56,7 +56,7 @@ The startFrom parameter must also contain a colon and can have inputs such as ``
 
 Following is a list of all the different justifications that you can input:
 
-1. sin(x)/cos(x) = tan(x)
+1. sin(x)/cos(x) = tan(x) \n
 to transform all the ratios of sin(x) with cos(x) in the expression into tan(x).
 
 2. expand
