@@ -110,4 +110,14 @@ steps
 
 This DSL will also be unique in providing the functionality of the verification of trigonometric proofs since there is no DSL catering to this domain specifically.
 
+## Language Implementation
 
+This DSL will be an internal DSL since there will be some degree of dependency on the syntax of the host-language. While the dependence exists, the implementation will attempt to eliminate as much of the host-flavour as is possible in order to make the language easy to learn and use for the users. This is why the syntax of the justifications is close to human language.
+
+I chose Python as a host-language for this DSL. One of the reasons for this choice was my own familiarity with the language which meant that I needed to dedicate lesser time to comprehend and learn how to use the implementation language. This host-language is well-suited to my language design primarily because of the existence of the necessary libraries to perform transformations on trigonometric expressions; this the trigonometric proofs language is an external DSL, there is no dependency of the design of the language's syntax itself on the host-language. However, this enabled me, as the language implementer to focus a greater deal of my time and attention on adding fluency and syntactic sugar to, as well removing the host-flavour from this language to make it more DSL-y rather than spending a majority of my time on writing functions to perform the transformations themselves.
+
+This DSL, as mentioned above, is an external DSL. Since the domain-experts whom the language is intended to serve might not necessarily be familiar with the conventions of the syntax of higher-level programming languages, it was most appropriate to eliminate this dependency and instead enable users to focus only on the proofs themselves.
+
+The syntax of this language is not entirely in terms of natural human language and tends to be more step-wise. This is because of the domain of the DSL, mathematics, also avoids the usage of a great deal of human-language to a great extent, instead using its own syntax in terms of operators, functions, and keywords.
+
+The DSL essentially takes the identity to be verified, the number of steps, and whether to transform the LHS expression or RHS expression as input. It then takes the justifications for each of the steps as input. Parsing these input parameters creates an intermediate form of the program which then contains variables and input parameters in terms of the host language. A library of functions which uses the SymPy simplify.fu module is then called on this intermediate script in order to produce the output steps for the user.

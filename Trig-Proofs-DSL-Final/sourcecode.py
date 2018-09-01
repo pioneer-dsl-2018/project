@@ -9,36 +9,37 @@ import random
 #for trigonometric simplification
 FU = sy.FU
 x = sy.symbols('x')
-#creating expr object
 
+#creating expr object
 class expr(object):
     startFrom = ""
     expressionI = ""
     numSteps = 0
     express = ""
-    def __init__(self, expressionI, numSteps = 0, startFrom = "Left"):
+    def __init__(self, expressionI, numSteps = 0, startFrom = "Left"): #defining defaults for when method is transformed using chaining
         self.expressionI = (expressionI)
         self.numSteps = numSteps
         self.startFrom = startFrom
     def transform(self, step):
         expres = ""
-        if "=" in str(self.expressionI):
+        if "=" in str(self.expressionI): #if it is the first input, i.e. the equation to be proved
             startFromBase = (self.startFrom == "Left" or self.startFrom == "LHS" or self.startFrom == "lhs" or self.startFrom == "left")
-            splitExpression = list(self.expressionI.partition("="))
-            LHS = splitExpression[0].lstrip()
-            RHS = splitExpression[2].lstrip()
-            LHS = LHS[:-1]
-            RHS = RHS[1:]
-            print (self.expressionI).strip()
-            if startFromBase == True:
+            splitExpression = list(self.expressionI.partition("=")) #splitting equation into LHS and RHS
+            LHS = splitExpression[0].replace(" ", "")  #eliminating all whitespace
+            RHS = splitExpression[2].replace(" ", "")  #eliminating all whitespace
+
+            print (self.expressionI).strip() #printing the equation to be proven
+            if startFromBase == True: #start from base checks whether or not startFrom = LHS
                 expres = sympify(LHS)
                 print "LHS: " + str(LHS)
             else:
                 expres = sympify(RHS)
                 print "RHS: " + str(RHS)
         else:
-            expres = self.expressionI
-        step = step.replace(" ", "")
+            expres = self.expressionI #this is in case expressionI is simply the transformed expression ()
+
+        step = step.replace(" ", "") #eliminating all whitespace from the step input
+
         if step == "sin(x)/cos(x)=tan(x)":
             expres = (FU['TR2i'](expres))
         elif step == "expand":
@@ -71,24 +72,24 @@ class expr(object):
         print expres
         return expr(expressionI = expres)
 
-    def verify(self):
-        if "=" in str(self.expressionI):
+    def verify(self): #to verify that LHS = RHS
+        if "=" in str(self.expressionI): #splitting into LHS and RHS
             startFromBase = (self.startFrom == "Left" or self.startFrom == "LHS" or self.startFrom == "lhs" or self.startFrom == "left")
             splitExpression = list(self.expressionI.partition("="))
             LHS = splitExpression[0]
             RHS = splitExpression[2]
-            LHS = sympify(LHS)
+            LHS = sympify(LHS) #converting LHS and RHS into sympy expressions for evaluation
             RHS = sympify(RHS)
         randomAngles = []
-        for i in range(25):
+        for i in range(25): #generating 25 random values between -360 and 360 degrees to see whether or not LHS = RHS for all of these
             randomAngle = random.randint(-360, 360)
-            LHSVal = round(LHS.evalf(subs = {x: radians(randomAngle)}), 5)
+            LHSVal = round(LHS.evalf(subs = {x: radians(randomAngle)}), 5) #rounding off to 5 decimal places in order to avoid discrepancies due to rounding
             RHSVal = round(RHS.evalf(subs = {x: radians(randomAngle)}), 5)
             if LHSVal != RHSVal:
                 return False
         return True
 
-    def equality(self, otherSide):
+    def equality(self, otherSide): #attempting to check whether or not LHS = RHS at the end of the steps in order to print QED at the end; however, this does not work for all cases yet since it checks for string equality which can be a problem when LHS = sin(x)*cos(x) but RHS = cos(x)*sin(x)
         if "=" in str(self.expressionI):
             startFromBase = (self.startFrom == "Left" or self.startFrom == "LHS" or self.startFrom == "lhs" or self.startFrom == "left")
             splitExpression = list(self.expressionI.partition("="))
