@@ -10,7 +10,7 @@ This language intends to help overcome just that predicament by facilitating you
 
 ## Video
 
-https://youtu.be/0gRX6SBdefk
+<video src="https://youtu.be/0gRX6SBdefk" width="320" height="200" controls preload></video>
 
 ## Installation and Use
 
