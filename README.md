@@ -56,47 +56,74 @@ The startFrom parameter must also contain a colon and can have inputs such as ``
 
 Following is a list of all the different justifications that you can input:
 
-1. sin(x)/cos(x) = tan(x)\
-to transform all the ratios of sin(x) with cos(x) in the expression into tan(x).
+1. ```sin(x)/cos(x) = tan(x)```\
+to transform all the ratios of ```sin(x)``` with ```cos(x)``` in the expression into ```tan(x)```.
 
-2. expand
-to expand the expression, for e.g. to transform tan(x) * (1 + sin(x)) into tan(x) + tan(x)*sin(x).
+2. ```expand```\
+to expand the expression, for e.g. to transform ```tan(x) * (1 + sin(x))``` into ```tan(x) + tan(x)*sin(x)```.
 
-3. factor
-to factor the expression, for e.g. to transform sin(x)**2/cos(x) + sin(x) into (sin(x) + cos(x))*sin(x)/cos(x).
+3. ```factor```\
+to factor the expression, for e.g. to transform ```sin(x)**2/cos(x) + sin(x)``` into ```(sin(x) + cos(x))*sin(x)/cos(x)```.
 
-4. simplify
+4. ```simplify```\
 to simplify the expression.
 
-5. csc(x) = 1/sin(x)
-to transform all the instances of csc(x) in the expression to 1/sin(x).
+5. ```csc(x) = 1/sin(x)```\
+to transform all the instances of ```csc(x)``` in the expression to ```1/sin(x)```.
 
-6. sec(x) = 1/cos(x)
-to transform all the instances of sec(x) in the expression to 1/cos(x).
+6. ```sec(x) = 1/cos(x)```\
+to transform all the instances of ```sec(x)``` in the expression to ```1/cos(x)```.
 
-7.
+7. ```tan(x) = sin(x)/cos(x)``` \
+to transform all the instances of ```tan(x)``` in the expression into ratios of ```sin(x)``` with ```cos(x)```.
 
+8. ```cot(x) = cos(x)\sin(x)``` \
+to transform all the instances of ```cot(x)``` in the expression into ratios of ```cos(x)``` with ```sin(x)```.
 
-elif step == "tan(x)=sin(x)/cos(x)" or step == "cot(x)=cos(x)/sin(x)":
-expres = (FU['TR2'](expres))
-elif step == "sin(x)**2+cos(x)**2=1":
-expres = (FU['TR5'](expres))
-elif step == "cos(x)**2=1-sin(x)**2":
-expres = (FU['TR6'](expres))
-elif step == "cos(2*x)=2*cos(x)**2-1":
-expres = (FU['TR6'](expres))
-elif step == "cos(x)**2 =1-sin(x)**2":
-expres = (FU['TR6'](expres))
-elif step == "sin(a+b)=sin(a)*cos(b)+sin(b)*cos(a)" or step == "sin(a-b)=sin(a)*cos(b)+sin(b)*cos(a)" or step == "cos(a+b)=cos(a)*cos(b)-sin(a)*sin(b)" or step == "cos(a - b) =  cos(a)*cos(b) + sin(a)*sin(b)":
-expres = (FU['TR10'](expres))
-elif step == "sin(2*x)=2*sin(x)*cos(x)" or step == "cos(2*x)=cos(x)**2-sin(x)**2":
-expres = (FU['TR11'](expres))
-elif step == "tan(a+b)=(tan(a)+tan(b))/(-tan(a)*tan(b)+1)" or step == "tan(a+b) = (tan(a)-tan(b))/(tan(a)*tan(b)+1)":
-expres = (FU['TR12'(expres)])
-elif step == "1/sin(x)=csc(x)" or step == "1/cos(x)=sec(x)" or step == "1/tan(x)=cot(x)":
-expres = (FU['TR111'](expres))
-elif step == "tan(x)**2+1=sec(x)**2" or step == "cot(x)**2+1=csc(x)**2":
-expres = (FU['TR22'(expres)])
-else:
+9. ```sin(x)**2 + cos(x)**2 = 1```\
+to transform all the instances of ```sin(x)**2``` in the expression into ratios of ```1 - cos(x)**2``` or vice versa.
+
+10. ```cos(2*x) = 2*cos(x)**2 - 1```\
+to transform all the instances of ```cos(2*x)``` in the expression into ```2*cos(x)**2 - 1``` or vice versa.
+
+11. ```sin(a + b) = sin(a)*cos(b) + sin(b)*cos(a)```\
+to transform all the instances of ```sin(a + b)```  in the expression into ```sin(a)*cos(b) + sin(b)*cos(a)``` or vice versa.
+
+12. ```sin(a - b) = sin(a)*cos(b) - sin(b)*cos(a)```\
+to transform all the instances of ```sin(a - b)``` in the expression into ```sin(a)*cos(b) - sin(b)*cos(a)``` or vice versa.
+
+13. ```cos(a + b) = cos(a)*cos(b) - sin(a)*sin(b)```\
+to transform all the instanes of ```cos(a + b)``` in the expression into  ```cos(a)*cos(b) - sin(a)*sin(b)``` or vice versa.
+
+14. ```cos(a - b) = cos(a)*cos(b) + sin(a)*sin(b)```\
+to transform all the instances of  ```cos(a - b)``` in the expression into ```cos(a)*cos(b) + sin(a)*sin(b)``` or vice versa.
+
+15.   ```sin(2*x) = 2*sin(x)*cos(x)``` \
+to transform all the instances of ```sin(2*x)``` in the expression into ```2*sin(x)*cos(x)``` or vice versa.
+
+16. ```cos(2*x) = cos(x)**2 - sin(x)**2```\
+to transform all the instances of ```cos(2*x)``` in the expression into ```cos(x)**2 - sin(x)**2 ``` or vice versa.
+
+17. ```tan(a + b) = (tan(a) + tan(b))/(-tan(a)*tan(b) + 1)```\
+to transform all the instances of ```tan(a + b)``` in the expression into ```(tan(a) + tan(b))/(-tan(a)*tan(b) + 1)``` or vice versa.
+
+18. ```tan(a - b) = (tan(a) - tan(b))/(tan(a)*tan(b) + 1)```\
+to transform all the instances of ```tan(a - b)``` in the expression into ```(tan(a) - tan(b))/(tan(a)*tan(b) + 1)``` or vice versa.
+
+19. ```1/sin(x) = csc(x)```\
+to transform all the instances of ```1\sin(x)```  in the expression into ```csc(x)```.
+
+20. ```1/cos(x) = sec(x)```\
+to transform all the instances of ```1\cos(x)```  in the expression into ```sec(x)```.
+
+21. ```1/tan(x) = cot(x)```\
+to transform all the instances of ```1\tan(x)```  in the expression into ```cot(x)```.
+
+22. ```tan(x)**2 + 1 = sec(x)**2```\
+to transform all the instances of ```tan(x)**2 + 1```in the expression into ```sec(x)**2``` or vice versa.
+
+23. ```cot(x)**2 + 1 = csc(x)**2```\
+to transform all the instances of ```cot(x)**2 + 1``` in the expression into ```csc(x)**2``` or vice versa.
+
 
 
