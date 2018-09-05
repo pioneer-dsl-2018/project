@@ -1,0 +1,16 @@
+# Design notebook entry
+
+## Last week's critique
+
+
+## Description
+
+The stage the project was at as of last week was such that the DSL was essentially a program which had the ability to perform trigonometric transformations on a function given the justifications for the same in terms of the variety of identities: including the square, compound-angle, reciprocal, product, and most double-angle identities. My goal for the previous week was being able to implement the initial syntax for the language and transform it to API form by making use of object-oriented programming concepts. I intended to add some degree of user interactivity and fluency to the initial program in order to enable a user to create an expression object, defining the identity to be proven, the number of steps needed, and which side of the equation needs to be transformed as well as the justifications for the transformations which needed to be performed in terms of chained expressions and to have the steps of the proof transforming the LHS into the RHS be output.
+
+In order to do this, I began by changing my initial language design into object-oriented form; defining an expression object as well as an ability to parse the expression input to split it into the left-hand side expression and right-hand side expression. I then defined the transform function which utilises Sympy’s simplify.fu module as a method of this class. By returning an object of type expression, I was able to implement the feature of chaining to enable users of the language to enter the transformations in a way closer to natural language. A major question and challenge I faced while working was while trying to eliminate some of the host flavour of Python: as to whether or not there was a way to imply that the initial input expression and the transformations were of String type without having to explicitly state the same by using double quotes. In addition to this, I questioned whether or not my language was fluent enough and how to eliminate further features of the host language.
+
+## Questions for you to answer
+
+Since my project now has the basic functionality as well as the basic syntax working, the most critical issue now is adding fluency and removing host flavour from the same in order to be able to move it further towards an internal DSL from what seems to me like an API at the moment. I need to research Python’s ability to account for elimination of stringent syntax in order to be able to find a way to make the trigonometric proof verifier more DSL-y. In addition to this, I am still looking for a way to implement 1-2 identities and am presently considering defining functions of my own for the same due to lack of such transformations in any libraries.
+Due to my own unfamiliarity with object-oriented programming, I spent a great deal of time debugging the newly-transformed API in order to be able to incorporate features and abilities such as allowing users to define an object of type expression, parsing its different input arguments as need be, as well as in trying to implement chaining for the transformations. I spent about 5 hours learning OOP concepts and writing the code and 4-5 hours debugging and 2 hours researching further design decisions. I spent a total of 12 hours on the project this week.
+
