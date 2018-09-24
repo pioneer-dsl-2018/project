@@ -1,0 +1,17 @@
+[0m[[0m[33mwarn[0m] [0m[0m/Users/liu/project/geometry_draw/src/main/scala/geometry_draw/Parser.scala:72:31: match may not be exhaustive.[0m
+[0m[[0m[33mwarn[0m] [0m[0mIt would fail on the following input: ~((x: String forSome x not in "read"), _)[0m
+[0m[[0m[33mwarn[0m] [0m[0m    "read" ~ identify_name ^^ {case "read" ~ a => CheckThePoint(a)}[0m
+[0m[[0m[33mwarn[0m] [0m[0m                              ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/Users/liu/project/geometry_draw/src/main/scala/geometry_draw/Parser.scala:77:102: match may not be exhaustive.[0m
+[0m[[0m[33mwarn[0m] [0m[0mIt would fail on the following inputs: ~(_, ")"), ~(_, (x: String forSome x not in ")"))[0m
+[0m[[0m[33mwarn[0m] [0m[0m  lazy val point_position: PackratParser[Point] = "(" ~ decimalNumber ~ "," ~ decimalNumber ~ ")" ^^ {case "(" ~ x ~ "," ~ y ~ ")" ⇒ Point(x.toDouble, y.toDouble)}[0m
+[0m[[0m[33mwarn[0m] [0m[0m                                                                                                     ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/Users/liu/project/geometry_draw/src/main/scala/geometry_draw/Parser.scala:78:102: match may not be exhaustive.[0m
+[0m[[0m[33mwarn[0m] [0m[0mIt would fail on the following inputs: ~(_, ")"), ~(_, (x: String forSome x not in ")"))[0m
+[0m[[0m[33mwarn[0m] [0m[0m  lazy val line_position: PackratParser[Line] = "(" ~ point_position ~ "," ~ point_position ~ ")" ^^ {case "(" ~ x ~ "," ~ y ~ ")" ⇒ Line(x, y)}[0m
+[0m[[0m[33mwarn[0m] [0m[0m                                                                                                     ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/Users/liu/project/geometry_draw/src/main/scala/geometry_draw/interpreter.scala:181:40: match may not be exhaustive.[0m
+[0m[[0m[33mwarn[0m] [0m[0mIt would fail on the following inputs: Arc(_, _, _), Line(_, _, _, _), Point(_, _, _, _)[0m
+[0m[[0m[33mwarn[0m] [0m[0m  def evaluate(action: Action): Unit = action match {[0m
+[0m[[0m[33mwarn[0m] [0m[0m                                       ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mfour warnings found[0m
